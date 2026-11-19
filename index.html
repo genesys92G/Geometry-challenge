@@ -13,7 +13,7 @@ body{font-family:var(--f);color:var(--ink);background:var(--bg);padding:env(safe
 .btn:focus-visible,input:focus-visible,select:focus-visible,.logo:focus-visible,.mc:focus-visible{outline:3px solid #ff9f1c;outline-offset:2px}
 .card{background:var(--panel);border-radius:20px;box-shadow:0 2px 0 rgba(255,255,255,.8) inset,0 7px 0 var(--line),0 16px 26px rgba(20,40,90,.16)}
 #intro{background:linear-gradient(160deg,#f7fbff,#d8e8ff);align-items:center;justify-content:center;text-align:center;overflow:auto;position:relative}
-#intro:before,#game:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--gr) 1px,transparent 1px),linear-gradient(90deg,var(--gr) 1px,transparent 1px);background-size:34px 34px;pointer-events:none}
+#intro:before,#setup:before,#game:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--gr) 1px,transparent 1px),linear-gradient(90deg,var(--gr) 1px,transparent 1px);background-size:34px 34px;pointer-events:none}
 .in{position:relative;padding:20px;max-width:900px}
 .scene{width:150px;height:150px;margin:60px auto 70px;position:relative;perspective:800px}
 .cube{width:150px;height:150px;position:relative;transform-style:preserve-3d;animation:spin 14s linear infinite}
@@ -31,20 +31,6 @@ h1{font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.05;margin:0;color:#2748b8;te
 @keyframes in{from{opacity:0;transform:translateY(10px) rotateX(5deg)}}
 .corner{position:absolute;left:12px;top:12px;display:flex;gap:8px;flex-wrap:wrap;z-index:5}.corner .btn{margin:0;padding:.35em .8em}
 #side{display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto;padding:0 6px 8px 2px}
-#teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;perspective:900px}
-.team{--c:#999;padding:8px 10px 4px;border-top:8px solid var(--c);display:grid;grid-template-columns:48px 1fr;gap:4px 8px;align-items:center}
-.logo{width:48px;height:48px;border-radius:50%;border:3px solid #fff;font-size:1.6rem;cursor:pointer;background:radial-gradient(circle at 32% 28%,#fff,color-mix(in srgb,var(--c) 30%,#fff));box-shadow:0 4px 0 color-mix(in srgb,var(--c) 70%,#000),0 8px 10px rgba(0,0,0,.2);padding:0}.logo:active{transform:translateY(3px)}
-.tn{font:700 1.05rem var(--f);color:var(--c);background:transparent;border:2px dashed transparent;border-radius:9px;padding:2px 6px;width:100%;min-width:0}.tn:hover,.tn:focus{border-color:var(--c);outline:0}
-.sc{grid-column:1/-1;display:flex;align-items:center;gap:6px}.sc small{flex:1;color:var(--mute);font-weight:600}
-.score{font:700 2.5rem/1 var(--f);color:var(--c);text-shadow:0 2px 0 color-mix(in srgb,var(--c) 60%,#000),0 4px 0 color-mix(in srgb,var(--c) 40%,#000),0 10px 10px rgba(0,0,0,.25)}.score.pop{animation:pop .4s}@keyframes pop{40%{transform:scale(1.4)}}
-.plus{--c:var(--tc);margin:0;padding:.35em .9em}
-#pk{position:fixed;z-index:40;display:none;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px;background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(20,40,90,.35);width:216px}#pk.on{display:grid}
-#pk button{font-size:1.6rem;border:0;background:#eef4ff;border-radius:10px;cursor:pointer;padding:4px}#pk button:hover{background:#ffe9a8}
-#tm{padding:10px 14px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center}
-#td{font:700 2.7rem/1 var(--f);color:#2748b8;min-width:2.6ch;text-align:center;text-shadow:0 2px 0 #9fb5f0,0 5px 0 #7088dc,0 10px 10px rgba(0,0,0,.2)}#td.end{color:#e63946;animation:shk .4s 3}
-.tsel{display:flex;flex-wrap:wrap;gap:5px}.tsel button{border:2px solid var(--line);background:#f3f7ff;border-radius:10px;font:600 .85rem var(--f);padding:3px 8px;cursor:pointer;color:var(--ink)}.tsel button.on{background:#2748b8;border-color:#2748b8;color:#fff}.tsel button:disabled{opacity:.5;cursor:not-allowed}
-.tbar{grid-column:1/-1;height:8px;border-radius:6px;background:#e3ecfa;box-shadow:inset 0 2px 3px rgba(0,0,0,.12);overflow:hidden}.tbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#06a77d,#ffc93c);transition:width .1s linear}
-.trow{grid-column:1/-1;display:flex;gap:8px}.trow .btn{margin:0;flex:1;padding:.3em}
 #cc{flex:1 0 auto;padding:12px 14px}
 .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
 .chip{background:#2748b8;color:#fff;padding:5px 14px;border-radius:999px;font-weight:600;box-shadow:0 4px 0 #1a3585}
@@ -85,7 +71,6 @@ input[type=number],select{font:600 1.1rem var(--f);padding:.4em .6em;border-radi
 .bub{fill:#fff!important;stroke:#1b2a49!important;stroke-width:6px!important}
 #tp{display:flex;align-items:center;gap:10px;padding:8px 12px}.bulb{font-size:2rem;filter:drop-shadow(0 0 10px var(--sun));animation:glow 2.5s ease-in-out infinite}@keyframes glow{50%{filter:drop-shadow(0 0 20px #ff9f1c)}}
 #tip{flex:1;line-height:1.35;font-size:.95rem}#nt{--c:#f4a300;margin:0;padding:.3em .7em;font-size:.85rem}
-#home{--c:#e63946}#goalb{--c:#f4a300}#mute{--c:#6c7a9c}
 .modal{position:fixed;inset:0;background:rgba(27,42,73,.45);display:none;place-items:center;z-index:45;padding:16px}.modal.on{display:grid}.mbox{padding:22px;text-align:center;max-width:400px;width:100%}.mbox h3{margin:0 0 6px;font-size:1.5rem}.mbox .tsel{justify-content:center;margin:10px 0}.mbox .tsel button{font-size:1.1rem;padding:6px 14px}.mbox .row{justify-content:center}
 #wl{font-size:5rem;filter:drop-shadow(0 8px 6px rgba(0,0,0,.3));animation:bob 1.5s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-10px)}}
 #toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0));transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.25s;z-index:60}#toast.on{opacity:1}
@@ -93,34 +78,94 @@ input[type=number],select{font:600 1.1rem var(--f);padding:.4em .6em;border-radi
 #fx .big{position:absolute;left:50%;top:42%;font-size:min(34vw,220px);transform:translate(-50%,-50%);animation:bigp 1.3s forwards;filter:drop-shadow(0 12px 14px rgba(0,0,0,.3))}@keyframes bigp{0%{transform:translate(-50%,-50%) scale(.2) rotate(-20deg);opacity:0}25%{transform:translate(-50%,-50%) scale(1.1) rotate(8deg);opacity:1}80%{opacity:1}100%{transform:translate(-50%,-70%) scale(1);opacity:0}}
 #fx .up,#fx .dn{position:absolute;animation:up 2s ease-out forwards}#fx .up{bottom:-60px}#fx .dn{top:-60px;animation-name:dn}
 @keyframes up{to{transform:translateY(-110vh) rotate(40deg)}}@keyframes dn{to{transform:translateY(110vh) rotate(-30deg)}}
-@media (max-width:900px){#game.on{display:block;height:auto;min-height:100%}#vis{min-height:300px;margin-bottom:14px}.fm,.mg{width:100%}#side{overflow:visible}}
+@media (max-width:900px){#game.on{display:block;height:auto;min-height:100%}#vis{min-height:300px;margin-bottom:14px}.fm,.mg,.dsv{width:100%}#side{overflow:visible}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+#setup{background:linear-gradient(160deg,#f7fbff,#d8e8ff);align-items:center;justify-content:center;overflow:auto;position:relative;padding:16px}
+.sbox{position:relative;width:min(100%,760px);padding:22px 24px;text-align:center}.sbox h2{margin:0 0 4px;font-size:2rem;color:#2748b8}
+.sec{margin:14px 0}.sec h4{margin:0 0 8px;font-size:1.15rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.chips button{border:3px solid var(--line);background:#f3f7ff;border-radius:12px;font:600 1.05rem var(--f);padding:6px 16px;cursor:pointer;color:var(--ink)}.chips button.on{background:#2748b8;border-color:#2748b8;color:#fff}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mcard{position:relative;border:3px solid var(--line);background:#fff;border-radius:16px;padding:10px 6px;cursor:pointer;font:600 1rem var(--f);color:var(--ink);box-shadow:0 4px 0 var(--line)}.mcard b{display:block;font-size:2rem;line-height:1.2}.mcard small{display:block;color:var(--mute);font-weight:500;font-size:.8rem}
+.mcard.on{border-color:#06a77d;background:#e6faf2;box-shadow:0 4px 0 #9fdcc6}.mcard.on:after{content:"✓";position:absolute;right:8px;top:2px;color:#06a77d;font-weight:700}
+#go{--c:#06a77d;font-size:1.5rem;padding:.5em 1.6em;border-radius:16px;margin-top:6px}
+#tm{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center;padding:10px 16px}
+#hg{width:84px;height:auto;display:block}#hg.flip{animation:flip .7s ease}@keyframes flip{from{transform:rotate(180deg)}}#hg.end{animation:shk .4s 3}
+.tinfo{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.tinfo .btn{margin:0}#qn{font-weight:700;color:#2748b8;font-size:1.15rem}
+#td{font:700 2rem/1 var(--f);color:#2748b8;text-shadow:0 2px 0 #9fb5f0,0 4px 0 #7088dc}#td.end{color:#e63946}
+#home{--c:#e63946}#mute{--c:#6c7a9c}
+#vis[data-cur=pencil],#vis[data-cur=pencil] *{cursor:var(--cpen)}
+#vis[data-cur=lens],#vis[data-cur=lens] *{cursor:var(--clens)}
+#vis[data-cur=flag],#vis[data-cur=flag] *{cursor:var(--cflag)}
+#vis[data-cur=grab] .fm{cursor:grab}#vis[data-cur=grab] .fm:active,.tile:active{cursor:grabbing}
+#vis button,#vis button *{cursor:pointer!important}
+.dwrap{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;width:100%}
+.dinfo{flex:1 1 170px;max-width:230px;background:#fff8e1;border-radius:18px;padding:14px;box-shadow:0 6px 0 #f1dfa6;font-size:1.25rem;line-height:1.4;text-align:center}
+.dleg{margin-top:10px;font-size:.95rem;color:var(--mute)}.dleg i{display:inline-block;width:38px;height:12px;border:3px solid #2748b8;border-top:0;vertical-align:middle;border-radius:0 0 3px 3px}.dleg small{font-size:.8rem}
+.dsv{flex:2 1 320px;width:min(100%,calc((100dvh - 150px)*1.25));max-width:620px;height:auto;display:block;border-radius:16px;box-shadow:0 8px 0 var(--line),0 14px 22px rgba(20,40,90,.16);touch-action:none;user-select:none}
+.dfc{animation:fadein .6s}@keyframes fadein{from{opacity:0}}
+.xs{touch-action:none}.fig .spk{font-size:22px;stroke:none;animation:spk .9s forwards}@keyframes spk{to{transform:translateY(-14px);opacity:0}}
+.jctl{display:flex;gap:10px;margin-top:10px}.ic{font-size:1.6rem;padding:.2em .8em;--c:#7b5cff}.ic.on{outline:3px solid #ff9f1c;outline-offset:2px}
+@media (max-width:600px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+/* predict the error */
+#vis[data-cur=err],#vis[data-cur=err] *{cursor:var(--cerr)}
+#vis[data-cur=ok],#vis[data-cur=ok] *{cursor:var(--cok)}
+.step{position:relative;padding-right:46px}
+.step.sel:after,.step.fixed:after{content:"✔";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#06a77d;font-size:1.4rem;font-weight:700}
+.step.bad{border-color:#e63946;background:#ffe0e3;animation:shk .4s}
+.step.fixed{border-color:#06a77d;background:#e6faf2}
+/* travel route buttons next to the hourglass */
+#tm.hasj{grid-template-columns:84px 1fr auto}#tm.hasj #qn{font-size:1rem}
+#jbar{display:flex;flex-direction:column;gap:8px;align-items:center}#jbar .ic{font-size:1.4rem;padding:.15em .6em;margin:0}
+/* farm missions: flip cards */
+.fcards{display:grid;gap:16px;width:min(100%,1000px);align-items:stretch}
+.fcards.c2{grid-template-columns:repeat(2,minmax(0,1fr))}.fcards.c3{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:1280px){.fcards.c3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){.fcards.c2,.fcards.c3{grid-template-columns:1fr}}
+.fcard{position:relative;perspective:1000px}
+.fci{display:grid;height:100%;transform-style:preserve-3d;transition:transform .6s}
+.fcard.flip .fci{transform:rotateY(180deg)}
+.ff,.bk{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:20px;border:4px solid var(--line);box-shadow:0 6px 0 var(--line),0 12px 18px rgba(20,40,90,.15)}
+.ff{min-height:340px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:600 1.1rem var(--f);color:var(--ink);cursor:pointer;background:linear-gradient(145deg,var(--cc),#fff);transition:visibility 0s .3s,transform .15s}
+.ff:hover{transform:translateY(-3px)}.ff .em{font-size:4.8rem;line-height:1;filter:drop-shadow(0 8px 6px rgba(0,0,0,.25))}.ff b{font-size:1.6rem;color:#2748b8}.ff small{margin-top:6px;color:var(--mute);font-size:.9rem;font-weight:500}
+.bk{transform:rotateY(180deg);background:#fff;padding:12px;display:flex;flex-direction:column;gap:8px;text-align:left;visibility:hidden;transition:visibility 0s .3s}
+.fcard.flip .bk{visibility:visible}.fcard.flip .ff{visibility:hidden}
+.bk .bh{display:flex;justify-content:space-between;align-items:center;gap:8px}.bk .bh b{color:#2748b8;font-size:1.1rem}.bk .fig{width:100%}.bk .btn.small{--c:#6c7a9c}
+.tick{display:none;position:absolute;top:-10px;right:-10px;z-index:3;width:40px;height:40px;border-radius:50%;background:#06a77d;color:#fff;font:700 1.5rem var(--f);place-items:center;box-shadow:0 4px 0 #05694f;pointer-events:none}
+.fcard.done .tick{display:grid}
+.fcard.done .ff{background:linear-gradient(145deg,#c9f3e2,#7fd9b4);border-color:#06a77d}.fcard.done .ff small{color:#05694f;font-weight:700}
+.fcard.done .bk{background:#e6faf2;border-color:#06a77d}
+.fcard.bad{animation:shk .4s}
 </style></head><body>
 <section id="intro" class="scr on"><div class="in">
 <div class="scene"><i class="fl a"></i><i class="fl b"></i><i class="fl c"></i><div class="cube"><b>▲</b><b>■</b><b>⬠</b><b>⬡</b><b>◆</b><b>⬢</b></div><div class="shadow"></div></div>
 <h1>Geometric Challenge</h1>
 <p class="sub">Grade 5 · Geometry · Perimeter</p>
 <button class="btn" id="start">Start</button>
-<p class="auth">Desing by David Beleño - Math Education - 2026</p></div></section>
+<p class="auth">Design by David Beleño - Math Education - 2026</p></div></section>
+
+<section id="setup" class="scr"><div class="card sbox">
+<h2>Game setup</h2>
+<div class="sec"><h4>⏳ Time per question</h4><div class="chips" id="cT"></div></div>
+<div class="sec"><h4>🎮 Question types</h4><div class="mgrid" id="cM"></div><p class="note" id="mh" hidden>Pick at least one question type.</p></div>
+<div class="sec"><h4>🔢 Number of questions</h4><div class="chips" id="cN"></div></div>
+<button class="btn" id="go">Let's get started!</button></div></section>
 
 <section id="game" class="scr">
-<div id="vis" class="card"><div class="corner"><button class="btn" id="home" aria-label="Home">🏠 Home</button><button class="btn" id="goalb">🏆 Points</button><button class="btn" id="mute" aria-label="Sound on or off">🔊</button></div><div id="visin" style="width:100%;display:flex;flex-direction:column;align-items:center"></div></div>
+<div id="vis" class="card" data-cur="arrow"><div class="corner"><button class="btn" id="home" aria-label="Home">🏠 Home</button><button class="btn" id="mute" aria-label="Sound on or off">🔊</button></div><div id="visin" style="width:100%;display:flex;flex-direction:column;align-items:center"></div></div>
 <aside id="side">
-<div id="teams"></div>
-<div id="tm" class="card"><div id="td">10</div><div class="tsel" id="tsel"></div><div class="tbar"><i id="tb"></i></div><div class="trow"><button class="btn" id="tgo" style="--c:#06a77d">Start</button><button class="btn" id="trs" style="--c:#6c5ce7">Reset</button></div></div>
-<div id="cc" class="card"><div class="bar"><span class="chip" id="chip"></span><button class="btn small" id="skip">Next challenge</button></div><div id="ui"></div></div>
+<div id="tm" class="card"><svg id="hg" viewBox="0 0 100 150" role="img" aria-label="Hourglass timer"><defs><clipPath id="gc"><path d="M24 14H76V34C76 56 54 66 54 75C54 84 76 94 76 116V136H24V116C24 94 46 84 46 75C46 66 24 56 24 34Z"/></clipPath><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffd35a"/><stop offset="1" stop-color="#f4a300"/></linearGradient></defs><rect x="14" y="4" width="72" height="10" rx="5" fill="#8a5a28"/><rect x="14" y="136" width="72" height="10" rx="5" fill="#8a5a28"/><path d="M24 14H76V34C76 56 54 66 54 75C54 84 76 94 76 116V136H24V116C24 94 46 84 46 75C46 66 24 56 24 34Z" fill="rgba(200,225,255,.35)"/><g clip-path="url(#gc)"><rect id="sT" x="20" y="14" width="60" height="61" fill="url(#sg)"/><rect id="sB" x="20" y="136" width="60" height="0" fill="url(#sg)"/><line id="sS" x1="50" y1="75" x2="50" y2="136" stroke="#f4a300" stroke-width="2.5" stroke-dasharray="3 3"/></g><path d="M24 14H76V34C76 56 54 66 54 75C54 84 76 94 76 116V136H24V116C24 94 46 84 46 75C46 66 24 56 24 34Z" fill="none" stroke="#5b6b8c" stroke-width="3" stroke-linejoin="round"/></svg><div class="tinfo"><div id="qn"></div><div id="td"></div><button class="btn small" id="tp2" aria-label="Pause or resume the hourglass">⏸</button></div><div id="jbar" hidden><button class="btn ic" id="bM" title="Step by step: one road at a time" aria-label="Manual mode: one road at a time">👣</button><button class="btn ic on" id="bA" title="Automatic: the whole trip" aria-label="Automatic mode: the whole trip">▶️</button></div></div>
+<div id="cc" class="card"><div class="bar"><span class="chip" id="chip"></span><button class="btn small" id="skip">Next ▶</button></div><div id="ui"></div></div>
 <div id="tp" class="card"><span class="bulb">💡</span><div id="tip"></div><button class="btn" id="nt">Next tip</button></div>
 </aside></section>
 
-<div id="gm" class="modal"><div class="card mbox"><h3>🏆 Game goal</h3><p>The first team to reach this score wins the game.</p><div class="tsel" id="gsel"></div><div class="row"><input id="gcus" type="number" min="1" placeholder="Custom" aria-label="Custom goal"><button class="btn" id="gset" style="--c:#06a77d">Set goal</button></div><button class="btn" id="gx" style="--c:#6c7a9c">Close</button></div></div>
-<div id="wm" class="modal"><div class="card mbox"><div id="wl">🏆</div><h3 id="wn"></h3><p>Congratulations, champions!</p><div class="row"><button class="btn" id="wagain" style="--c:#06a77d">Play again</button><button class="btn" id="wkeep" style="--c:#6c5ce7">Keep playing</button></div></div></div>
-<div id="pk"></div><div id="toast"></div><div id="fx"></div>
+<div id="fin" class="modal"><div class="card mbox"><div id="wl">🏆</div><h3>All done!</h3><p id="fn"></p><div class="row"><button class="btn" id="again" style="--c:#06a77d">Play again</button><button class="btn" id="fhome" style="--c:#6c5ce7">Setup</button></div></div></div>
+<div id="toast"></div><div id="fx"></div>
 
 <script>
 const $=s=>document.querySelector(s),R=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),pick=a=>a[R(0,a.length-1)],sum=a=>a.reduce((x,y)=>x+y,0),shuf=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
-const teams=[{n:"Red Team",c:"#ef476f",l:"🦁",s:0},{n:"Blue Team",c:"#118ab2",l:"🦅",s:0}],LG=["🦁","🦅","🐯","🐬","🚀","⭐","🔥","⚡","🐼","🦊","🐲","🏆"],U=["cm","m","in","ft","yd"];
+const U=["cm","m","in","ft","yd"];
 const PAL=["#ffd6e0","#d6ecff","#d9f5d0","#fff1b8","#e6dcff","#ffe0c2","#cdf3ee","#f9d9f2"];
-let timer,bag=[],ti=0,goal=0;
+let ti=0;
 /* sound */
 let AC,mute=false;
 function snd(t){if(mute)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state=="suspended")AC.resume()}catch(e){return}
@@ -131,46 +176,55 @@ function burst(E,n,cls){const b=$('#fx'),g=document.createElement('div');g.class
 for(let i=0;i<n;i++){const s=document.createElement('span');s.textContent=pick(E);s.className=cls;s.style.left=R(3,95)+'%';s.style.fontSize=R(24,50)+'px';s.style.animationDelay=Math.random()*.5+'s';b.appendChild(s);setTimeout(()=>s.remove(),2600)}}
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1500)}
 function fb(ok,m,soft){const e=$('#fb');e.className='fb '+(ok?'ok':'no');e.innerHTML=(ok?pick(["🎉 Great job!","🌟 Excellent!","👏 Well done!","🥳 Perfect!"]):pick(["😬 Not yet.","🙈 Oops!","😅 Almost, try again!"]))+" "+m;
-if(soft)return;snd(ok?'good':'bad');ok?burst(["🎉","👏","🌟","🥳","🏆","✨","🎊","😄"],18,'up'):burst(["😢","😬","🙈","😅","🤔","💥"],8,'dn')}
+if(soft)return;snd(ok?'good':'bad');ok?burst(["🎉","👏","🌟","🥳","🏆","✨","🎊","😄"],18,'up'):burst(["😢","😬","🙈","😅","🤔","💥"],8,'dn');
+if(ok){tstop();clearTimeout(advance);advance=setTimeout(next,3800);toast("Next question coming up…")}}
 /* tips */
-const TIPS=["Perimeter is the distance around a figure. Add the length of every side.","Rectangle: P = 2 × (length + width). Square: P = 4 × side.","Regular polygon: all sides are equal, so P = number of sides × one side.","Perimeter is measured in length units like cm, m, in or ft, never in square units.","Missing side? Add the known sides, then subtract that total from the perimeter.","Compound figure: measure only the outside edge. Do not count the lines inside.","How to play: teams solve the challenge, the teacher gives +1 to the winning team, and a new challenge appears.","Set a goal with the 🏆 Points button. The first team to reach it wins.","Click a team logo to change it. Click a team name to rename it."];
-const TT={q:"Questions: find every measure, then add all the sides around the figure.",c:"Calculator: type the number, choose the correct unit, then press Check.",k:"Farm: plant the dashed squares, then find the meters of fence around the field.",p:"Predict: click the step with the mistake, type the correct perimeter, then press Verify.",m:"Match Up: select two cards. Add the sides of each figure to find its perimeter.",j:"Travel Route: click the traveler to watch the whole trip. Add the distances, or find the hidden one using the total."};
-const NAMES={q:"Questions",c:"Calculator",k:"Farm Fences",p:"Predict the Error",m:"Match Up",j:"Travel Route"};
+const TIPS=["Perimeter is the distance around a figure. Add the length of every side.","Rectangle: P = 2 × (length + width). Square: P = 4 × side.","Regular polygon: all sides are equal, so P = number of sides × one side.","Perimeter is measured in length units like cm, m, in or ft, never in square units.","Missing side? Add the known sides, then subtract that total from the perimeter.","Compound figure: measure only the outside edge. Do not count the lines inside.","Drawing: measure each side along its border with the ruler, then add the sides to check the perimeter.","Explorer: note each side you reveal, then add them all.","Predict the error: check every step of the solution against the figure. Only one step is wrong.","Farm missions: flip each card, read the plot and answer its perimeter. You get +10 seconds for every crop."];
+const TT={c:"Calculator: read the figure, add the sides (or find the missing one), then answer.",k:"Farm: plant and fence a plot, or flip each mission card and answer them one by one.",j:"Travel: press ▶️ or 👣 to follow the trip, then answer.",x:"Explorer: sweep the lens over the sides to reveal them, then add them.",u:"Unknown: the perimeter is given. Find the missing side.",d:"Drawing: measure each side along its border with the ruler, then press Verify.",e:"Predict Error: click the step with the mistake, press Enter answer, then fix it."};
+const NAMES={c:"Calculator",k:"Farm Fences",j:"Travel Route",x:"Explorer",u:"Unknown",d:"Drawing",e:"Predict Error"};
 const tip=t=>$('#tip').textContent=t,nextTip=()=>{ti=(ti+1)%TIPS.length;tip(TIPS[ti])};setInterval(nextTip,16000);tip(TIPS[0]);
-/* teams + goal */
-$('#teams').innerHTML=teams.map((t,i)=>`<div class="card team" style="--c:${t.c};--tc:${t.c}"><button class="logo" data-i="${i}" title="Change logo" aria-label="Change team logo">${t.l}</button><input class="tn" value="${t.n}" data-i="${i}" aria-label="Team name"><div class="sc"><div class="score" id="s${i}">0</div><small id="g${i}"></small><button class="btn plus" data-i="${i}">+1</button></div></div>`).join('');
-$('#teams').addEventListener('click',e=>{const lg=e.target.closest('.logo'),pl=e.target.closest('.plus');
-if(lg){const i=+lg.dataset.i,p=$('#pk'),r=lg.getBoundingClientRect();p.innerHTML=LG.map(l=>`<button data-l="${l}">${l}</button>`).join('');p.style.left=Math.max(6,Math.min(r.left,innerWidth-226))+'px';p.style.top=r.bottom+6+'px';p.className='on';p.onclick=ev=>{const b=ev.target.closest('button');if(!b)return;teams[i].l=b.dataset.l;lg.textContent=b.dataset.l;p.className=''};e.stopPropagation()}
-if(pl){const i=+pl.dataset.i,s=$('#s'+i);teams[i].s++;s.textContent=teams[i].s;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');clearTimeout(timer);
-if(goal&&teams[i].s===goal)return win(i);snd('point');burst([teams[i].l,"⭐","✨"],12,'up');toast("Next challenge loading…");timer=setTimeout(next,2200)}});
-document.addEventListener('click',e=>{if(!e.target.closest('#pk'))$('#pk').className=''});
-$('#teams').addEventListener('input',e=>{if(e.target.dataset.i!=null)teams[e.target.dataset.i].n=e.target.value});
-function setGoal(g){goal=g;$('#goalb').textContent=g?`🏆 Goal: ${g}`:"🏆 Points";teams.forEach((t,i)=>$('#g'+i).textContent=g?"/ "+g:"")}
-$('#gsel').innerHTML=[0,5,10,15,20,30].map(g=>`<button data-g="${g}">${g||"Off"}</button>`).join('');
-$('#goalb').onclick=()=>$('#gm').classList.add('on');$('#gx').onclick=()=>$('#gm').classList.remove('on');
-$('#gsel').onclick=e=>{const b=e.target.closest('button');if(b){setGoal(+b.dataset.g);$('#gm').classList.remove('on')}};
-$('#gset').onclick=()=>{const v=parseInt($('#gcus').value);if(v>0){setGoal(v);$('#gm').classList.remove('on')}else toast("Type a number greater than 0")};
-function win(i){const t=teams[i];$('#wl').textContent=t.l;$('#wn').textContent=t.n+" wins!";$('#wm').classList.add('on');snd('win');burst(["🏆","🎉","🥇","🎊","⭐",t.l],34,'up')}
-$('#wagain').onclick=()=>{teams.forEach((t,i)=>{t.s=0;$('#s'+i).textContent=0});$('#wm').classList.remove('on');next()};
-$('#wkeep').onclick=()=>{$('#wm').classList.remove('on');next()};
-/* timer */
-const DUR=[[3,"3 s"],[5,"5 s"],[10,"10 s"],[15,"15 s"],[30,"30 s"],[60,"1 min"]];let TS=10,tr=10,tid=null,tend=0,ls=null,locked=false,prevTS=10;
-$('#tsel').innerHTML=DUR.map(d=>`<button data-s="${d[0]}">${d[1]}</button>`).join('');
-function tdraw(){const c=Math.ceil(tr-1e-9);$('#td').textContent=c>=60?Math.floor(c/60)+":"+String(c%60).padStart(2,"0"):c;$('#tb').style.width=(tr/TS*100)+'%';
-document.querySelectorAll('#tsel button').forEach(b=>{const s=+b.dataset.s;b.classList.toggle('on',s==TS);b.disabled=locked&&s!=60;b.textContent=(b.disabled?"🔒 ":"")+DUR.find(d=>d[0]==s)[1]})}
-function treset(){clearInterval(tid);tid=null;tr=TS;$('#td').classList.remove('end');$('#tgo').textContent="Start";tdraw()}
-function lockT(on){if(on&&!locked){prevTS=TS;TS=60}if(!on&&locked)TS=prevTS;locked=on;treset()}
-$('#tsel').onclick=e=>{const b=e.target.closest('button');if(b&&!b.disabled){TS=+b.dataset.s;treset()}};$('#trs').onclick=treset;
-$('#tgo').onclick=()=>{if(tid){clearInterval(tid);tid=null;$('#tgo').textContent="Resume";return}
-if(tr<=0)treset();tend=Date.now()+tr*1000;ls=null;$('#tgo').textContent="Pause";snd('start');
-tid=setInterval(()=>{tr=(tend-Date.now())/1000;const c=Math.ceil(tr);if(tr<=0){tr=0;clearInterval(tid);tid=null;$('#tgo').textContent="Start";$('#td').classList.add('end');snd('alarm');toast("⏰ Time’s up!")}else if(c<=3&&c!=ls){ls=c;snd('tick')}tdraw()},100)};
-treset();
+/* setup + flow */
+const MODES=[["c","Calculator","🧮","Questions & calculator"],["k","Farm Fences","🌾","Plant, fence, measure"],["j","Travel Route","🚩","Follow the trip"],["x","Explorer","🔍","Find hidden sides"],["u","Unknown","❓","Find the side"],["d","Drawing","✏️","Draw the perimeter"],["e","Predict Error","❌","Find the mistake"]];
+const TIMES=[[3,"3 s"],[5,"5 s"],[10,"10 s"],[15,"15 s"],[30,"30 s"],[60,"1 min"],[120,"2 min"]],NQ=[5,10,15],cfg={time:30,n:10,modes:new Set(MODES.map(m=>m[0]))},CUR={c:'arrow',k:'grab',j:'flag',x:'lens',u:'arrow',d:'pencil',e:'err'};
+let queue=[],qi=0,advance=null,FX=0;
+/* cursors */
+const cu=(b,x,y,f)=>`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'>${b}</svg>`)}") ${x} ${y}, ${f}`,rs=document.documentElement.style;
+rs.setProperty('--cpen',cu(`<path d='M3 29l2-8L21 5l6 6L11 27z' fill='#ffc93c' stroke='#1b2a49' stroke-width='2' stroke-linejoin='round'/><path d='M3 29l2-8 6 6z' fill='#f6d7b0' stroke='#1b2a49' stroke-width='2' stroke-linejoin='round'/><path d='M21 5l3-3 6 6-3 3z' fill='#ef476f' stroke='#1b2a49' stroke-width='2' stroke-linejoin='round'/>`,3,29,'crosshair'));
+rs.setProperty('--clens',cu(`<circle cx='12' cy='12' r='8' fill='rgba(255,255,255,.55)' stroke='#1b2a49' stroke-width='3'/><path d='M18 18l10 10' stroke='#7b5cff' stroke-width='5' stroke-linecap='round'/>`,12,12,'zoom-in'));
+rs.setProperty('--cflag',cu(`<path d='M7 3v27' stroke='#1b2a49' stroke-width='3' stroke-linecap='round'/><path d='M7 4h19l-5 6 5 6H7z' fill='#ef476f' stroke='#1b2a49' stroke-width='2' stroke-linejoin='round'/>`,7,29,'pointer'));
+rs.setProperty('--cerr',cu(`<path d='M6 6l20 20M26 6L6 26' stroke='#fff' stroke-width='9' stroke-linecap='round'/><path d='M6 6l20 20M26 6L6 26' stroke='#e63946' stroke-width='5' stroke-linecap='round'/>`,16,16,'crosshair'));
+rs.setProperty('--cok',cu(`<path d='M5 17l8 8L28 7' fill='none' stroke='#fff' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'/><path d='M5 17l8 8L28 7' fill='none' stroke='#06a77d' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/>`,16,16,'pointer'));
+/* setup window */
+function drawSetup(){$('#cT').innerHTML=TIMES.map(t=>`<button data-v="${t[0]}" class="${cfg.time==t[0]?'on':''}" aria-pressed="${cfg.time==t[0]}">${t[1]}</button>`).join('');
+$('#cN').innerHTML=NQ.map(n=>`<button data-v="${n}" class="${cfg.n==n?'on':''}" aria-pressed="${cfg.n==n}">${n}</button>`).join('');
+$('#cM').innerHTML=MODES.map(m=>`<button class="mcard ${cfg.modes.has(m[0])?'on':''}" data-m="${m[0]}" aria-pressed="${cfg.modes.has(m[0])}"><b>${m[2]}</b>${m[1]}<small>${m[3]}</small></button>`).join('');
+$('#go').disabled=!cfg.modes.size;$('#mh').hidden=!!cfg.modes.size}
+$('#cT').onclick=e=>{const b=e.target.closest('button');if(b){cfg.time=+b.dataset.v;drawSetup()}};
+$('#cN').onclick=e=>{const b=e.target.closest('button');if(b){cfg.n=+b.dataset.v;drawSetup()}};
+$('#cM').onclick=e=>{const b=e.target.closest('button');if(!b)return;const m=b.dataset.m;cfg.modes.has(m)?cfg.modes.delete(m):cfg.modes.add(m);drawSetup()};
+/* hourglass timer */
+let TS=30,tr=30,tid=null,tend=0,ls=null;
+function tdraw(){const f=TS?tr/TS:0,h=61*f,sT=$('#sT'),sB=$('#sB'),sS=$('#sS');sT.setAttribute('y',75-h);sT.setAttribute('height',h);sB.setAttribute('y',136-(61-h));sB.setAttribute('height',61-h);
+sS.style.display=tid&&tr>0?'':'none';sS.setAttribute('y2',136-(61-h));const c=Math.ceil(tr-1e-9);$('#td').textContent=c>=60?Math.floor(c/60)+":"+String(c%60).padStart(2,"0"):c+" s"}
+function tstop(){clearInterval(tid);tid=null;tdraw()}
+function trun(){clearInterval(tid);tend=Date.now()+tr*1000;tid=setInterval(()=>{tr=(tend-Date.now())/1000;const c=Math.ceil(tr);
+if(tr<=0){tr=0;clearInterval(tid);tid=null;$('#td').classList.add('end');$('#hg').classList.add('end');snd('alarm');toast("⌛ Time's up!")}else if(c<=3&&c!=ls){ls=c;snd('tick')}tdraw()},100)}
+function tstart(s){clearInterval(tid);tid=null;TS=tr=s;ls=null;$('#tp2').textContent='⏸';$('#td').classList.remove('end');const g=$('#hg');g.classList.remove('end','flip');void g.getBoundingClientRect();g.classList.add('flip');tdraw();trun()}
+$('#tp2').onclick=()=>{if(tr<=0)return;if(tid){tstop();$('#tp2').textContent='▶️'}else{$('#tp2').textContent='⏸';trun();tdraw()}};
 /* nav */
 function show(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on',e.id==id))}
-$('#start').onclick=()=>{snd('start');show('game');next()};$('#home').onclick=()=>{clearTimeout(timer);lockT(false);show('intro')};
-$('#skip').onclick=()=>{clearTimeout(timer);next()};$('#nt').onclick=nextTip;$('#mute').onclick=()=>{mute=!mute;$('#mute').textContent=mute?'🔇':'🔊'};
-function next(){if(!bag.length)bag=shuf(["q","c","k","p","m","j"]);const t=bag.pop();snd('next');lockT(t=="j");$('#tm').style.display=t=="k"?"none":"";$('#chip').textContent=NAMES[t];tip(TT[t]);({q:Q,c:C,k:K,p:Pd,m:M,j:J})[t]()}
+function startGame(){const m=[...cfg.modes];queue=[];let bag=[];while(queue.length<cfg.n){if(!bag.length)bag=shuf(m);queue.push(bag.pop())}qi=0;$('#fin').classList.remove('on');show('game');next()}
+function finish(){tstop();$('#fn').textContent=`You finished ${queue.length} questions. Great work!`;$('#fin').classList.add('on');snd('win');burst(["🏆","🎉","🥇","🎊","⭐","✨"],34,'up')}
+function next(){clearTimeout(advance);if(qi>=queue.length)return finish();const t=queue[qi++];snd('next');
+$('#qn').textContent=`Question ${qi} of ${queue.length}`;$('#chip').textContent=NAMES[t];$('#skip').textContent=qi>=queue.length?"Finish 🏁":"Next ▶";tip(TT[t]);
+$('#vis').dataset.cur=CUR[t];$('#vis').scrollTop=0;$('#jbar').hidden=true;$('#tm').classList.remove('hasj');FX=0;({c:CQ,k:K,j:J,x:X,u:Uk,d:D,e:PE})[t]();tstart(cfg.time+FX)}
+$('#start').onclick=()=>{snd('start');show('setup');drawSetup()};
+$('#go').onclick=()=>{if(cfg.modes.size){snd('start');startGame()}};
+$('#home').onclick=()=>{clearTimeout(advance);tstop();show('intro')};
+$('#skip').onclick=()=>next();$('#nt').onclick=nextTip;$('#mute').onclick=()=>{mute=!mute;$('#mute').textContent=mute?'🔇':'🔊'};
+$('#again').onclick=startGame;$('#fhome').onclick=()=>{$('#fin').classList.remove('on');show('setup');drawSetup()};
 function render(v,u){$('#visin').innerHTML=v;$('#ui').innerHTML=u+'<div id="fb" class="fb" aria-live="polite"></div>';const x=$('#ans');if(x)x.onkeydown=e=>{if(e.key=="Enter")$('#chk').click()}}
+tdraw();
 /* geometry */
 const dist=(a,b)=>Math.round(Math.hypot(a[0]-b[0],a[1]-b[1])*100)/100,NM={3:"triangle",4:"quadrilateral",5:"pentagon",6:"hexagon",7:"heptagon",8:"octagon",9:"nonagon"};
 const rpts=n=>[...Array(n)].map((_,i)=>[Math.cos(i*2*Math.PI/n-1.5708),Math.sin(i*2*Math.PI/n-1.5708)]);
@@ -208,24 +262,24 @@ let d=new Set(kind=="rect"?[L[0]*L[1],L[0]+L[1],2*L[0]+L[1]]:kind=="square"?[L[0
 while(d.size<3){let v=ans+pick([-4,-3,-2,-1,1,2,3,4,5]);if(v>0&&v!=ans)d.add(v)}
 const opts=shuf([ans,...[...d].slice(0,3)]);
 render(fig(sh.pts,labels(sh,u),so(sh))+note(sh),`<p class="story">${story}</p><div class="opts">${opts.map(o=>`<button class="btn opt" data-v="${o}">${o} ${u}</button>`).join("")}</div>`);
-document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=+b.dataset.v==ans;b.style.setProperty('--c',ok?'#06a77d':'#e63946');ok?fb(1,kind=="reg"?`P = ${n} × ${L[0]} = ${ans} ${u}. Give +1 to the winning team!`:`P = ${L.join(" + ")} = ${ans} ${u}. Give +1 to the winning team!`):fb(0,"Perimeter means adding every side around the outside of the figure.")})}
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=+b.dataset.v==ans;b.style.setProperty('--c',ok?'#06a77d':'#e63946');ok?fb(1,kind=="reg"?`P = ${n} × ${L[0]} = ${ans} ${u}.`:`P = ${L.join(" + ")} = ${ans} ${u}.`):fb(0,"Perimeter means adding every side around the outside of the figure.")})}
 /* 3 Calculator */
 function C(){const kind=pick(["rect","square","tri","L","reg","reg","irr","irr","comp","comp"]),sh=shape(kind),u=pick(U),L=sh.L,n=L.length,P=sum(L),miss=Math.random()<.45,uk=pick(sh.shown),ans=miss?L[uk]:P;
 const txt=miss?`The perimeter of this ${sh.name} is <b>${P} ${u}</b>. Find the missing side marked <b>?</b>`:`Find the perimeter of this ${sh.name}.`;
 render(fig(sh.pts,labels(sh,u,miss?uk:-1),so(sh))+note(sh),`<p class="story">${txt}<br>Type your answer and choose the unit of measure.</p><div class="row"><input id="ans" type="number" step="any" inputmode="decimal" placeholder="Value" aria-label="Value"><select id="un" aria-label="Unit"><option value="">Unit</option>${U.map(x=>`<option>${x}</option>`).join("")}</select><button class="btn" id="chk" style="--c:#06a77d">Check</button></div>`);
 $('#chk').onclick=()=>{const v=parseFloat($('#ans').value),un=$('#un').value;if(isNaN(v)||!un)return fb(0,"Type a number and choose a unit first.",1);
 const how=kind=="reg"?(miss?`${P} ÷ ${n} = ${ans} ${u}`:`${n} × ${L[0]} = ${ans} ${u}`):(miss?`the missing side is ${ans} ${u}`:`P = ${L.join(" + ")} = ${ans} ${u}`);
-if(v==ans&&un==u)fb(1,`${how}. Give +1 to the winning team!`);
+if(v==ans&&un==u)fb(1,`${how}.`);
 else if(v==ans)fb(0,"The number is right, but check the unit of measure.");
 else fb(0,miss?(kind=="reg"?"All sides are equal. Divide the perimeter by the number of sides.":"Add the known sides, then subtract that total from the perimeter."):(kind=="reg"?"All sides are equal. Multiply one side by the number of sides.":"Add the length of every side of the outside edge."))}}
-/* 2 Farm */
-const CR=[["Corn","🌽","#f6c945"],["Wheat","🌾","#e0a84a"],["Rice","🌱","#9bd36b"],["Barley","🌿","#5fbf8a"],["Oats","🌼","#f3a6c8"]];let HV=[];
-function K(){const cols=14,rows=9,S=40,PAD=10,T=11,W=cols*S+2*PAD,H=rows*S+2*PAD,DR=[[1,0],[0,1],[-1,0],[0,-1]];
+/* Farm */
+const CR=[["Corn","🌽","#f6c945"],["Wheat","🌾","#e0a84a"],["Rice","🌱","#9bd36b"],["Barley","🌿","#5fbf8a"],["Oats","🌼","#f3a6c8"]];
+function K(){FX=10;if(Math.random()<.75)return KM(R(2,3));const cols=14,rows=9,S=40,PAD=10,T=11,W=cols*S+2*PAD,H=rows*S+2*PAD,DR=[[1,0],[0,1],[-1,0],[0,-1]];
 function mk(kind,big){let w,h,inc;
-if(kind=="rect"){w=big?R(6,10):R(2,4);h=big?R(4,6):R(2,3);if(w==h)w++;inc=()=>1}
-else if(kind=="square"){w=h=big?R(4,6):R(2,3);inc=()=>1}
-else if(kind=="L"){w=big?R(6,9):R(3,4);h=big?R(5,6):R(3,4);const nw=big?R(2,w-3):1,nh=big?R(2,h-2):1;inc=(i,j)=>!(i>=w-nw&&j>=h-nh)}
-else if(kind=="T"){const t=big?R(2,3):1,sw=big?R(2,3):1;w=big?R(7,10):R(3,5);h=big?R(5,6):R(3,4);const sx=R(1,w-sw-1);inc=(i,j)=>j<t||(i>=sx&&i<sx+sw)}
+if(kind=="rect"){w=big?R(6,8):R(2,4);h=big?R(4,5):R(2,3);if(w==h)w++;inc=()=>1}
+else if(kind=="square"){w=h=big?R(4,5):R(2,3);inc=()=>1}
+else if(kind=="L"){w=big?R(6,8):R(3,4);h=big?R(5,6):R(3,4);const nw=big?R(2,w-3):1,nh=big?R(2,h-3):1;inc=(i,j)=>!(i>=w-nw&&j>=h-nh)}
+else if(kind=="T"){const t=big?R(2,3):1,sw=big?R(2,3):1;w=big?R(7,9):R(3,5);h=big?R(5,6):R(3,4);const sx=R(1,w-sw-1);inc=(i,j)=>j<t||(i>=sx&&i<sx+sw)}
 else{const a=big?R(2,3):2,b=big?2:1;w=3*a;h=3*b;inc=(i,j)=>i<a*(3-Math.floor(j/b))}
 const fx=Math.random()<.5,fy=Math.random()<.5,cl=[];for(let j=0;j<h;j++)for(let i=0;i<w;i++)if(inc(fx?w-1-i:i,fy?h-1-j:j))cl.push([i,j]);return{w,h,cl}}
 function runsOf(cells){const has=(x,y)=>cells.has(y*cols+x),E=new Map();
@@ -238,35 +292,27 @@ const st=E.values().next().value;let sq=[],e=st;do{sq.push(e);e=E.get(e.nx+','+e
 let r0=sq.findIndex((q,i)=>q.d!=sq[(i+sq.length-1)%sq.length].d);if(r0<0)r0=0;sq=[...sq.slice(r0),...sq.slice(0,r0)];
 const runs=[];sq.forEach(q=>{const l=runs[runs.length-1];if(l&&l.d==q.d){l.keys.push(q.k);l.ex=q.nx;l.ey=q.ny}else runs.push({d:q.d,keys:[q.k],sx:q.x,sy:q.y,ex:q.nx,ey:q.ny})});
 runs.forEach(r=>r.len=r.keys.length);return runs}
-const kind=pick(["rect","rect","square","L","L","T","stairs"]),big=Math.random()<.5,sh=mk(kind,big),ks=shuf(CR);
-const tx=R(1,cols-sh.w-1),ty=R(1,rows-sh.h-1),tc=new Set(sh.cl.map(([i,j])=>(ty+j)*cols+tx+i));
-const F=[{x:tx,y:ty,w:sh.w,h:sh.h,c:ks[0],cells:tc}],want=pick([1,2]);let t=0;
-while(F.length<want+1&&t++<300){const w=R(2,4),h=R(2,3),x=R(1,cols-w-1),y=R(1,rows-h-1);if(F.every(f=>x>f.x+f.w+2||f.x>x+w+2||y>f.y+f.h+2||f.y>y+h+2)){const cs=new Set();for(let yy=y;yy<y+h;yy++)for(let xx=x;xx<x+w;xx++)cs.add(yy*cols+xx);F.push({x,y,w,h,c:ks[F.length],cells:cs})}}
-F.forEach(f=>f.runs=runsOf(f.cells));
-const gf=F[0],gi=0,runs=gf.runs,c0=[...gf.cells],P=runs.reduce((a,r)=>a+r.len,0),lens=runs.map(r=>r.len);
-const gap=new Set(shuf(c0).slice(0,Math.min(big?R(4,8):R(2,4),c0.length-2))),orig=new Set(),g=Array(cols*rows).fill(null);
-F.forEach(f=>f.cells.forEach(i=>{if(!gap.has(i)){g[i]=f.c[0];orig.add(i)}}));
-if(HV.length>=5)HV=[];
-const crop=n=>CR.find(c=>c[0]==n),fence=new Set(),per=new Set(),order=runs.flatMap(r=>r.keys);order.forEach(k=>per.add(k));
-let tool=gf.c[0],ph=1,down=false,dmode=null,tries=0,done=false,et=[];
-const ec=k=>{const[a,b]=k.slice(1).split('_').map(Number),X=PAD+a*S,Y=PAD+b*S;return k[0]=='h'?[X,Y,X+S,Y]:[X,Y,X,Y+S]};
+const kind=pick(["rect","rect","square","L","L","T","stairs"]),big=Math.random()<.5,sh=mk(kind,big),cr=pick(CR),farmer=pick(["Ana","Leo","Mia","Sam","Zoe","Max"]);
+const tx=R(1,cols-sh.w-1),ty=R(1,rows-sh.h-1),cells=new Set(sh.cl.map(([i,j])=>(ty+j)*cols+tx+i)),runs=runsOf(cells),lens=runs.map(r=>r.len),P=sum(lens),area=cells.size,bw=sh.w,bh=sh.h;
+const g=Array(cols*rows).fill(null),fence=new Set(),per=new Set(),order=runs.flatMap(r=>r.keys);order.forEach(k=>per.add(k));
+let tool='',ph=1,down=false,dmode=null,done=false,busy=false,et=[];
+const crop=n=>CR.find(c=>c[0]==n),ec=k=>{const[a,b]=k.slice(1).split('_').map(Number),X=PAD+a*S,Y=PAD+b*S;return k[0]=='h'?[X,Y,X+S,Y]:[X,Y,X,Y+S]};
 const pc=(k,nw)=>{const[a,b,c,d]=ec(k),dx=Math.sign(c-a),dy=Math.sign(d-b),p=[a+dx*5,b+dy*5,c-dx*5,d-dy*5].map(v=>v.toFixed(1)),ln=(col,w)=>`<line x1="${p[0]}" y1="${p[1]}" x2="${p[2]}" y2="${p[3]}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`;return `<g class="fp${nw?' new':''}">${ln('#5b3a17',12)}${ln('#c58b4a',7)}</g>`};
-const cent=f=>{const C=f.runs.map(r=>{const mx=PAD+(r.sx+r.ex)/2*S,my=PAD+(r.sy+r.ey)/2*S,o=r.d%2?22:17;return[mx+DR[r.d][1]*o,my-DR[r.d][0]*o]});
+const cent=()=>{const C=runs.map(r=>{const mx=PAD+(r.sx+r.ex)/2*S,my=PAD+(r.sy+r.ey)/2*S,o=r.d%2?22:17;return[mx+DR[r.d][1]*o,my-DR[r.d][0]*o]});
 for(let it=0;it<60;it++)for(let i=0;i<C.length;i++)for(let j=i+1;j<C.length;j++){const dx=C[i][0]-C[j][0],dy=C[i][1]-C[j][1],ox=42-Math.abs(dx),oy=28-Math.abs(dy);if(ox>0&&oy>0){if(oy<ox){const s=(dy>=0?1:-1)*oy/2;C[i][1]+=s;C[j][1]-=s}else{const s=(dx>=0?1:-1)*ox/2;C[i][0]+=s;C[j][0]-=s}}}return C};
-const dimG=(f,id)=>{const C=cent(f);return f.runs.map((r,k)=>{const[cx,cy]=C[k];return `<g class="pill"${id?` id="pl${k}"`:''}><rect x="${cx-19}" y="${cy-12}" width="38" height="24" rx="12"/><text x="${cx}" y="${cy+1}">${r.len} m</text></g>`}).join("")};
+const C0=cent(),dimG=runs.map((r,k)=>{const[cx,cy]=C0[k];return `<g class="pill" id="pl${k}"><rect x="${cx-19}" y="${cy-12}" width="38" height="24" rx="12"/><text x="${cx}" y="${cy+1}">${r.len} m</text></g>`}).join("");
 const sl=runs.map((r,k)=>`<line class="sdl" id="sd${k}" x1="${PAD+r.sx*S}" y1="${PAD+r.sy*S}" x2="${PAD+r.ex*S}" y2="${PAD+r.ey*S}"/>`).join(""),outline=runs.map(r=>(PAD+r.sx*S)+','+(PAD+r.sy*S)).join(" ");
-const sv=`<svg class="fm" id="fm" viewBox="0 0 ${W} ${H}" role="img" aria-label="Farm grid. Click or drag on the grid lines to build the fence."><defs><pattern id="hat" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="10" fill="rgba(255,255,255,.55)"/></pattern></defs><rect width="${W}" height="${H}" fill="#6b8f3a"/><g id="cl"></g><g id="lk"></g><g id="fpl"></g><g id="sdg">${sl}</g><line id="gh" stroke="#fff" stroke-opacity=".7" stroke-width="9" stroke-linecap="round" style="display:none;pointer-events:none"/>${F.map((f,j)=>`<g class="dim" id="dm${j}">${dimG(f,j==gi)}</g>`).join("")}</svg>`;
-render(sv,`<div class="hv" id="hv"></div><div class="stp"><span id="s1">1 · Plant</span><span id="s2">2 · Fence</span></div><p class="story" id="ft"></p><div class="pal"><button class="tile" id="tc" draggable="true" data-t="${gf.c[0]}" style="--c:${gf.c[2]}">${gf.c[1]} ${gf.c[0]}</button><button class="tile fn" id="tf" draggable="true" data-t="Fence" hidden>Wood fence</button><button class="tile" draggable="true" data-t="" style="--c:#e8e8e8">✖ Erase</button></div><p class="fc" id="fcw" hidden>🪵 Fence pieces placed: <b id="fc">0</b></p><div class="row" id="ar" hidden style="margin:0 0 6px"><input id="ans" type="number" min="1" inputmode="numeric" placeholder="Meters" aria-label="Meters of fence"><b>m</b></div><div class="eq" id="eq" hidden></div><div class="row" style="margin:0"><button class="btn" id="clr" style="--c:#6c5ce7">Clear</button><button class="btn" id="chk" style="--c:#06a77d">Check</button></div>`);
+const sv=`<svg class="fm" id="fm" viewBox="0 0 ${W} ${H}" role="img" aria-label="Farm grid. Plant the plot, then fence it."><defs><pattern id="hat" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="10" fill="rgba(255,255,255,.55)"/></pattern></defs><rect width="${W}" height="${H}" fill="#6b8f3a"/><g id="cl"></g><g id="lk"></g><g id="fpl"></g><g id="sdg">${sl}</g><line id="gh" stroke="#fff" stroke-opacity=".7" stroke-width="9" stroke-linecap="round" style="display:none;pointer-events:none"/><g class="dim" id="dm">${dimG}</g></svg>`;
+render(sv,`<div class="stp"><span id="s1">1 · Plant</span><span id="s2">2 · Fence</span><span id="s3">3 · Measure</span></div><p class="story" id="ft"></p><div class="pal">${CR.map(c=>`<button class="tile" data-t="${c[0]}" draggable="true" style="--c:${c[2]}">${c[1]} ${c[0]}</button>`).join("")}<button class="tile fn" id="tf" data-t="Fence" draggable="true" hidden>Wood fence</button><button class="tile" id="te" data-t="~" draggable="true" style="--c:#e8e8e8">✖ Erase</button></div><p class="fc" id="fcw" hidden>🪵 Fence pieces placed: <b id="fc">0</b></p><div class="row" id="ar" hidden style="margin:0 0 6px"><input id="ans" type="number" min="1" inputmode="numeric" placeholder="Meters" aria-label="Meters of fence"><b>m</b></div><div class="eq" id="eq" hidden></div><div class="row" style="margin:0"><button class="btn" id="clr" style="--c:#6c5ce7">Clear</button><button class="btn" id="chk" style="--c:#06a77d">Check</button></div>`);
 const fm=$('#fm'),gh=$('#gh'),pos=e=>{const r=fm.getBoundingClientRect();return[(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*H/r.height]};
-const hvDraw=()=>{$('#hv').innerHTML='<span>🌾 Harvest</span>'+[0,1,2,3,4].map(i=>`<i class="${HV[i]?'on':''}">${HV[i]||'☆'}</i>`).join('')+`<small>Tries: <b>${tries}</b></small>`};
-const tiles=()=>document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('sel',t.dataset.t==tool));
-function draw(nk){$('#cl').innerHTML=g.map((v,i)=>{const X=PAD+(i%cols)*S+1.5,Y=PAD+Math.floor(i/cols)*S+1.5,z=S-3,c=v&&crop(v),ig=gap.has(i)&&!v,m=X+z/2,n=Y+z/2+1;
-return `<rect x="${X}" y="${Y}" width="${z}" height="${z}" rx="6" fill="${c?c[2]:'#93c453'}" stroke="${c?'rgba(0,0,0,.18)':'none'}"/>`+(ig?`<rect x="${X}" y="${Y}" width="${z}" height="${z}" rx="6" fill="url(#hat)" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/><text x="${m}" y="${n}" style="font-size:20px;opacity:.4">${gf.c[1]}</text>`:c?`<text x="${m}" y="${n}" style="font-size:22px">${c[1]}</text>`:'')}).join('');
+const tiles=()=>document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('sel',t.dataset.t==tool&&tool!==''));
+function draw(nk){$('#cl').innerHTML=g.map((v,i)=>{const X=PAD+(i%cols)*S+1.5,Y=PAD+Math.floor(i/cols)*S+1.5,z=S-3,c=v&&crop(v);
+return `<rect x="${X}" y="${Y}" width="${z}" height="${z}" rx="6" fill="${c?c[2]:'#93c453'}" stroke="${c?'rgba(0,0,0,.18)':'none'}"/>`+(cells.has(i)&&!v?`<rect x="${X}" y="${Y}" width="${z}" height="${z}" rx="6" fill="url(#hat)" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>`:c?`<text x="${X+z/2}" y="${Y+z/2+1}" style="font-size:22px">${c[1]}</text>`:'')}).join('');
 $('#lk').innerHTML=ph>=2?`<polygon points="${outline}" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="3" stroke-linejoin="round"/>`:'';
 $('#fpl').innerHTML=[...fence].map(k=>pc(k,k==nk)).join('');$('#fc').textContent=fence.size}
-function setPh(n){ph=n;tool=n==1?gf.c[0]:'Fence';$('#s1').className=n>1?'dn':'on';$('#s2').className=n==2?'on':'';
-$('#tc').hidden=n>1;$('#tf').hidden=n==1;$('#ar').hidden=n==1;$('#dm'+gi).classList.toggle('on',n>1);
-$('#ft').innerHTML=n==1?`<b>Step 1 · Plant.</b> Fill the dashed squares. Each square is 1 m.`:`<b>Step 2 · Fence.</b> How many meters of fence go around the field? Type it and press Check. Tip: you can draw the fence on the lines.`;
+function setPh(n){ph=n;tool='';$('#s1').className=n>1?'dn':'on';$('#s2').className=n==2?'on':n>2?'dn':'';$('#s3').className=n==3?'on':'';
+document.querySelectorAll('.tile:not(.fn):not(#te)').forEach(t=>t.hidden=n>1);$('#tf').hidden=n!=2;$('#te').hidden=n==3;$('#ar').hidden=n!=3;$('#dm').classList.toggle('on',n==3);
+$('#ft').innerHTML=n==1?`🧑‍🌾 ${farmer} grows <b>${cr[0]}</b>. Pick it in the panel and plant the plot.`:n==2?`Now fence the plot. Pick the fence, then draw on the lines or tap the plot.`:`Read the sides. How many meters of fence go around the plot?`;
 draw();tiles()}
 function clearEx(){et.forEach(clearTimeout);et=[];runs.forEach((_,k)=>{$('#sd'+k).classList.remove('on');$('#pl'+k).classList.remove('hot')});$('#eq').hidden=true}
 function explain(){clearEx();const e=$('#eq');e.hidden=false;e.innerHTML=lens.map((v,k)=>`<span id="eq${k}">${v}</span>`).join(' + ')+' = <b>?</b>';
@@ -275,92 +321,226 @@ const cellAt=(x,y)=>{const a=Math.floor((x-PAD)/S),b=Math.floor((y-PAD)/S);retur
 function edgeAt(x,y){const gx=(x-PAD)/S,gy=(y-PAD)/S,ry=Math.round(gy),rx=Math.round(gx),dh=Math.abs(gy-ry)*S,dv=Math.abs(gx-rx)*S,cx=Math.floor(gx),cy=Math.floor(gy);let best=null,bd=T;
 if(dh<bd&&cx>=0&&cx<cols&&ry>=0&&ry<=rows){best='h'+cx+'_'+ry;bd=dh}
 if(dv<bd&&cy>=0&&cy<rows&&rx>=0&&rx<=cols)best='v'+rx+'_'+cy;return best}
-function put(i,first){if(i<0||orig.has(i))return;const gp=gap.has(i);
-if(tool==''){if(gp&&g[i]){g[i]=null;draw()}return}
-if(tool=='Fence'){first&&toast("Plant first. The fence comes in step 2.");return}
-if(!gp||tool!=gf.c[0]){first&&toast("Plant only in the dashed squares");return}
-if(!g[i]){g[i]=tool;snd('step');draw();if([...gap].every(j=>g[j])){snd('good');toast("🔒 Field complete! Look at its sides.");setPh(2)}}}
-function putE(k,first){if(tool==''){if(fence.delete(k))draw();return}
-if(tool!='Fence'){first&&toast("The field is locked. Pick the wood fence.");return}
-if(!per.has(k)){first&&(toast("The fence goes around the "+gf.c[0]+" field."),snd('bad'));return}
+function put(i,first){if(i<0)return;const inP=cells.has(i);
+if(tool=='~'){if(inP&&g[i]){g[i]=null;draw()}return}
+if(!tool){first&&toast("Pick a crop in the panel first.");return}
+if(tool=='Fence'){first&&toast("Plant the crop first.");return}
+if(!inP){first&&toast("Plant inside the marked plot.");return}
+if(tool!=cr[0]){first&&(toast(`That is ${tool}. Read the text again.`),snd('bad'));return}
+if(!g[i]){g[i]=tool;snd('step');draw();if([...cells].every(j=>g[j])){snd('good');toast("🔒 Crop planted!");setPh(2)}}}
+function toMeasure(){setTimeout(()=>{if(ph==2){snd('good');toast("📏 Fence done! Read the sides.");setPh(3)}},250)}
+function autoFence(){if(busy)return;busy=true;const todo=order.filter(k=>!fence.has(k));let n=0;(function nx(){if(n<todo.length){fence.add(todo[n]);draw(todo[n++]);snd('step');setTimeout(nx,35)}else{busy=false;toMeasure()}})()}
+function putE(k,first){if(tool=='~'){if(fence.delete(k))draw();return}
+if(tool!='Fence'){first&&toast("Pick the fence in the panel first.");return}
+if(!per.has(k)){first&&(toast("The fence goes around the plot."),snd('bad'));return}
 if(dmode==null)dmode=fence.has(k)?'rm':'add';
-if(dmode=='add'&&!fence.has(k)){fence.add(k);snd('step');draw(k)}else if(dmode=='rm'&&fence.has(k)){fence.delete(k);draw()}}
+if(dmode=='add'&&!fence.has(k)){fence.add(k);snd('step');draw(k);if(fence.size==P)toMeasure()}else if(dmode=='rm'&&fence.has(k)){fence.delete(k);draw()}}
 function ghost(k){if(!k){gh.style.display='none';return}const[a,b,c,d]=ec(k),dx=Math.sign(c-a),dy=Math.sign(d-b);gh.setAttribute('x1',a+dx*5);gh.setAttribute('y1',b+dy*5);gh.setAttribute('x2',c-dx*5);gh.setAttribute('y2',d-dy*5);gh.style.display=''}
-function hover(e){const[x,y]=pos(e),gx=(x-PAD)/S,gy=(y-PAD)/S;F.forEach((f,j)=>{if(j==gi&&ph>=2)return;$('#dm'+j).classList.toggle('on',gx>=f.x-.6&&gx<=f.x+f.w+.6&&gy>=f.y-.6&&gy<=f.y+f.h+.6)});ghost(ph==2&&!done&&tool=='Fence'?edgeAt(x,y):null)}
-function act(e,first){if(done)return;const[x,y]=pos(e);if(ph==1)put(cellAt(x,y),first);else{const k=edgeAt(x,y);if(k)putE(k,first)}}
+function hover(e){const[x,y]=pos(e);ghost(ph==2&&!busy&&tool=='Fence'?edgeAt(x,y):null)}
+function act(e,first){if(done||busy||ph==3)return;const[x,y]=pos(e);if(ph==1)put(cellAt(x,y),first);else{const k=edgeAt(x,y);if(k)putE(k,first);else if(first&&tool=='Fence'&&cells.has(cellAt(x,y)))autoFence();else if(first&&tool=='~'&&fence.size&&cells.has(cellAt(x,y))){fence.clear();draw()}}}
 fm.onpointerdown=e=>{if(e.button>0)return;e.preventDefault();try{fm.setPointerCapture(e.pointerId)}catch(_){}down=true;dmode=null;hover(e);act(e,true)};
 fm.onpointermove=e=>{if(down)act(e,false);else hover(e)};fm.onpointerup=fm.onpointercancel=()=>{down=false;dmode=null};fm.onpointerleave=()=>{if(!down)ghost(null)};
 fm.ondragover=e=>e.preventDefault();fm.ondrop=e=>{e.preventDefault();dmode=null;act(e,true)};
 document.querySelectorAll('.tile').forEach(t=>{t.onclick=()=>{tool=t.dataset.t;tiles()};t.ondragstart=e=>{tool=t.dataset.t;e.dataTransfer.setData('text/plain',tool);tiles()}});
-$('#clr').onclick=()=>{if(done)return;if(ph==1)g.forEach((v,i)=>{if(!orig.has(i))g[i]=null});else fence.clear();clearEx();draw();$('#fb').className='fb';$('#fb').innerHTML=''};
-$('#chk').onclick=()=>{if(done)return;if(ph==1)return fb(0,"Fill every dashed square first.",1);
+$('#clr').onclick=()=>{if(done||busy||ph==3)return;if(ph==1)g.fill(null);else fence.clear();clearEx();draw();$('#fb').className='fb';$('#fb').innerHTML=''};
+$('#chk').onclick=()=>{if(done||busy)return;if(ph==1)return fb(0,"Plant the whole plot first.",1);if(ph==2)return fb(0,"Fence the plot first.",1);
 const v=$('#ans').value;if(v==="")return fb(0,"Type the meters of fence first.",1);
-const x=parseFloat(v);tries++;hvDraw();
-if(x==P){done=true;clearEx();['#chk','#clr','#ans'].forEach(s=>$(s).disabled=true);const todo=order.filter(k=>!fence.has(k));let n=0;
-(function nx(){if(n<todo.length){const k=todo[n++];fence.add(k);draw(k);snd('step');setTimeout(nx,35)}else{$('#fcw').hidden=false;HV.push(gf.c[1]);hvDraw();fb(1,`P = ${lens.join(" + ")} = ${P} m. Give +1 to the winning team!`);if(HV.length>=5)toast("🌾 Big harvest! Five fields done")}})();return}
-const mx=Math.max(...lens),rc=kind=="rect"||kind=="square";fb(0,x==gf.cells.size?"That's the area. Add the sides instead.":(rc&&x==gf.w+gf.h)?"You added only two sides.":lens.includes(P-x)?"A side seems missing.":x==P+runs.length?"Corners aren't extra pieces.":"Add the length of every side.");explain()};
-hvDraw();setPh(1)}
-/* 4 Predict */
-function Pd(){let sh,u,L,P,s1,s2,res,bug,kind,v;
-do{kind=pick(["rect","square","tri","L"]);sh=shape(kind);u=pick(["cm","m","ft"]);L=sh.L;P=sum(L);
-v=pick(kind=="rect"?["measure","missing","area","half","arith"]:kind=="square"?["measure","missing","area","arith"]:["measure","missing","arith"]);
-let S=L.slice();s1=null;
-if(v=="measure"){const j=R(0,L.length-1);S[j]=Math.max(1,S[j]+pick([-3,-2,-1,1,2,3]));s2=S.join(" + ");res=sum(S);bug=0;s1=S}
-else if(v=="missing"){s2=L.slice(0,-1).join(" + ");res=P-L[L.length-1];bug=1}
-else if(v=="area"){const b=L[kind=="rect"?1:0];s2=L[0]+" × "+b;res=L[0]*b;bug=1}
-else if(v=="half"){s2=L[0]+" + "+L[1];res=L[0]+L[1];bug=1}
-else{s2=L.join(" + ");res=P+pick([-4,-3,-2,-1,1,2,3,4]);bug=2}
-s1=(s1||L).map(x=>x+" "+u).join(", ")}while(res==P||res<=0);
-const nm=pick(["Mia","Leo","Sofia","Noah","Lucas","Emma"]);let sel=-1;
-render(fig(sh.pts,L.map(x=>x+" "+u))+'<p class="note">Every side is labeled. Compare the notebook with the figure.</p>',`<p class="story">${nm} found the perimeter of this ${sh.name}, but there is <b>one mistake</b>. Click the wrong step and type the correct perimeter.</p><div class="board"><h4>📓 ${nm}’s notebook</h4><button class="step" data-i="0"><b>Step 1.</b> Write the sides<span>${s1}</span></button><button class="step" data-i="1"><b>Step 2.</b> Set up the operation<span>${s2}</span></button><button class="step" data-i="2"><b>Step 3.</b> Write the result<span>P = ${res} ${u}</span></button></div><div class="row"><input id="ans" type="number" step="any" inputmode="decimal" placeholder="Correct P" aria-label="Correct perimeter"><b>${u}</b><button class="btn" id="chk" style="--c:#06a77d">Verify</button></div>`);
-document.querySelectorAll('.step').forEach(b=>b.onclick=()=>{sel=+b.dataset.i;document.querySelectorAll('.step').forEach(x=>x.classList.toggle('sel',x==b))});
-$('#chk').onclick=()=>{const x=parseFloat($('#ans').value);if(sel<0||isNaN(x))return fb(0,"Select a step and type the correct perimeter first.",1);
-if(sel!=bug)return fb(0,"That step is fine. Compare each step with the figure.");
-x==P?fb(1,`Step ${bug+1} was wrong. The real perimeter is ${L.join(" + ")} = ${P} ${u}. Give +1 to the winning team!`):fb(0,"Right step! Now recalculate the perimeter using the sides in the figure.")}}
-/* 5 Match Up */
-function M(){const u=pick(["cm","m"]),items=[],seen=new Set();let t=0;
-while(items.length<8&&t++<500){const k=pick(["rect","square","tri","reg","house"]),sh=k=="house"?comp("house"):shape(k),P=sum(sh.L);if(seen.has(P))continue;seen.add(P);items.push({sh,P})}
-const cards=shuf(items.flatMap((_,i)=>[{p:i,t:"f"},{p:i,t:"v"}])),n=items.length;let sel=null,found=0,bad=0,lock=false;
-render(`<div class="mg">${cards.map(c=>{const it=items[c.p];return `<button class="mc" data-p="${c.p}" aria-label="${c.t=="f"?"Figure card":"Perimeter card"}">${c.t=="f"?svg(it.sh.pts,labels(it.sh,u),Object.assign({fs:21,p:58,col:PAL[c.p]},so(it.sh))):`P = ${it.P} ${u}`}</button>`}).join("")}</div>`,`<p class="story">Match every figure with its perimeter. Select two cards at a time. The unit is <b>${u}</b>.</p><p class="story">Pairs: <b id="mp">0</b> / ${n} · Mistakes: <b id="mm">0</b></p>`);
-const bs=[...document.querySelectorAll('.mc')];
-bs.forEach(b=>b.onclick=()=>{if(lock||b.classList.contains('done')||b===sel)return;
-if(!sel){sel=b;b.classList.add('sel');return}
-const a=sel;sel=null;b.classList.add('sel');
-if(a.dataset.p==b.dataset.p&&(!!a.querySelector('svg'))!=(!!b.querySelector('svg'))){[a,b].forEach(x=>{x.classList.remove('sel');x.classList.add('done');x.style.setProperty('--pc',PAL[+x.dataset.p])});found++;$('#mp').textContent=found;snd('point');
-if(found==n)fb(1,`All ${n} pairs matched with ${bad} mistake${bad==1?"":"s"}. Give +1 to the winning team!`)}
-else{bad++;$('#mm').textContent=bad;lock=true;snd('bad');[a,b].forEach(x=>x.classList.add('bad'));setTimeout(()=>{[a,b].forEach(x=>x.classList.remove('bad','sel'));lock=false},650);fb(0,"Not a match. Add the sides of the figure again.",1)}})}
-/* 6 Travel Route */
-const LM=[["🌳","the park"],["⛲","the fountain"],["🏪","the shop"],["🏫","the school"],["🌉","the bridge"],["🗼","the tower"],["🎡","the Ferris wheel"],["🏥","the clinic"],["⛪","the church"]];
-function J(){const mode=pick(["total","missing"]),kind=mode=="missing"?pick(["rect","L","stairs"]):pick(["rect","L","U","stairs","T"]);let pts;
+const x=parseFloat(v);
+if(x==P){done=true;clearEx();['#chk','#clr','#ans'].forEach(s=>$(s).disabled=true);$('#fcw').hidden=false;fb(1,`P = ${lens.join(" + ")} = ${P} m.`);return}
+const rc=kind=="rect"||kind=="square";fb(0,x==area?"That's the area. Add the sides instead.":(rc&&x==bw+bh)?"You added only two sides.":lens.includes(P-x)?"A side seems missing.":x==P+runs.length?"Corners aren't extra pieces.":"Add the length of every side.");explain()};
+setPh(1)}
+/* Farm missions: 2-3 crops, one flip card each */
+function KM(cnt){FX=10*cnt;const u="m",crs=shuf(CR).slice(0,cnt),fms=shuf(["Ana","Leo","Mia","Sam","Zoe","Max"]).slice(0,cnt);
+const M=crs.map((cr,i)=>{const kind=pick(["rect","square","L","tri","comp","rect"]),sh=kind=="comp"?comp(pick(["two","bump"])):shape(kind),pp=sh.pts,ar=Math.abs(pp.reduce((t,p,j)=>{const q=pp[(j+1)%pp.length];return t+p[0]*q[1]-q[0]*p[1]},0))/2;
+return{i,kind,sh,cr,fm:fms[i],L:sh.L,P:sum(sh.L),ar,done:false}});
+const card=m=>`<div class="fcard" style="--cc:${m.cr[2]}"><span class="tick">✓</span><div class="fci">
+<button class="ff" aria-label="Mission ${m.i+1}: tap to flip the card"><span class="em">${m.cr[1]}</span><b>Mission ${m.i+1}</b><span>${m.cr[0]}</span><small>Tap to flip 🔄</small></button>
+<div class="bk"><div class="bh"><b>Mission ${m.i+1} · ${m.cr[1]} ${m.cr[0]}</b><button class="btn small fbk" aria-label="Flip the card back">↺</button></div>
+<p class="story" style="margin:0">🧑‍🌾 ${m.fm} grows ${m.cr[0]}. How many meters of fence go around the plot?</p>
+${svg(m.sh.pts,labels(m.sh,u),{col:m.cr[2],parts:[{pts:m.sh.pts,col:m.cr[2]}],ticks:m.sh.ticks})}
+<div class="row" style="margin:0"><input type="number" min="1" step="any" inputmode="decimal" placeholder="Meters" aria-label="Meters of fence, mission ${m.i+1}"><b>m</b><button class="btn fck" style="--c:#06a77d">Check</button></div>
+<div class="fb" aria-live="polite"></div></div></div></div>`;
+render(`<div class="fcards c${cnt}">${M.map(card).join("")}</div>`,
+`<p class="story">🌾 ${cnt} missions! Tap a card to flip it, read the plot and type the meters of fence for each one.</p><p class="fc">Missions completed: <b id="mdn">0</b> / ${cnt}</p><p class="note" style="text-align:left;margin:0">⏱ +10 seconds for every crop.</p>`);
+$('#vis').dataset.cur='arrow';let dn=0;
+document.querySelectorAll('.fcard').forEach((el,i)=>{const m=M[i],inp=el.querySelector('input'),msg=el.querySelector('.fb'),ok=el.querySelector('.fck');
+const say=(g,t)=>{msg.className='fb';void msg.offsetWidth;msg.className='fb '+(g?'ok':'no');msg.textContent=t};
+el.querySelector('.ff').onclick=()=>{el.classList.add('flip');snd('step');setTimeout(()=>{try{inp.focus({preventScroll:true})}catch(_){}},650)};
+el.querySelector('.fbk').onclick=()=>el.classList.remove('flip');
+const chk=()=>{if(m.done)return;if(inp.value==="")return say(0,"Type the meters of fence first.");const x=parseFloat(inp.value);
+if(x==m.P){m.done=true;dn++;el.classList.add('done');inp.disabled=true;ok.disabled=true;el.querySelector('.ff small').textContent="Completed ✔";say(1,`P = ${m.L.join(" + ")} = ${m.P} m.`);$('#mdn').textContent=dn;
+if(dn==cnt)fb(1,`All missions complete! ${M.map(q=>q.P).join(" + ")} = ${sum(M.map(q=>q.P))} m of fence in all.`);else{snd('good');burst(["🎉","✨","🌟"],8,'up')}}
+else{snd('bad');el.classList.add('bad');setTimeout(()=>el.classList.remove('bad'),450);
+say(0,x==m.ar?"That's the area. Add the sides instead.":(m.kind=="rect"&&x==m.L[0]+m.L[1])?"You added only two sides.":m.L.includes(m.P-x)?"A side seems missing.":"Add the length of every side.")}};
+ok.onclick=chk;inp.onkeydown=e=>{if(e.key=="Enter")chk()}})}
+/* Travel Route */
+const CH=[
+{e:"👮",r:"Officer",n:["Dan","Eva","Ray"],v:"walks",h:"🏢",s:["🏦","🍩","🏫","🏥","🏪","🏛️","⛪","🏟️"],bg:"#e3efff",rd:"#bcd0ef"},
+{e:"🚴",r:"Cyclist",n:["Leo","Mia","Ana"],v:"rides",h:"🏠",s:["🌳","⛲","🍦","🏖️","🎡","🛝","🥐","🏞️"],bg:"#e4f7e9",rd:"#bfe3c9"},
+{e:"🛵",r:"Courier",n:["Sam","Zoe","Tom"],v:"rides",h:"🏪",s:["🏠","🏡","🏢","🏨","🏫","🏘️","🏬","🏣"],bg:"#fff1dc",rd:"#f1d6aa"},
+{e:"🏃",r:"Footballer",n:["Max","Ian","Lia"],v:"runs",h:"🏟️",s:["⚽","🥅","🏆","🥤","👕","🧤","📣","🏅"],bg:"#eaf8d6",rd:"#cfe6a6"},
+{e:"🐱",r:"Cat",n:["Luna","Milo","Kiwi"],v:"walks",h:"🏠",s:["🐟","🥛","🧶","🐭","🌿","🐦","🛋️","🧺"],bg:"#fdeaf3",rd:"#f6c9de"},
+{e:"🐶",r:"Dog",n:["Rex","Coco","Bella"],v:"runs",h:"🏡",s:["🦴","🎾","🌳","🍖","⛲","🥎","🛁","🏞️"],bg:"#fff7d6",rd:"#f1e1a0"},
+{e:"🐟",r:"Fish",n:["Nemo","Bubbles","Finn"],v:"swims",h:"🪸",s:["🐚","⚓","🦀","🐙","🫧","🌊","🦑","🐡"],bg:"#dff3ff",rd:"#b4def7"},
+{e:"🐦",r:"Bird",n:["Kiwi","Tweety","Sky"],v:"flies",h:"🪺",s:["🌳","🍎","🌸","🍒","🌻","🍇","🍃","🌾"],bg:"#eaf6ff",rd:"#cde4f8"},
+{e:"🐢",r:"Turtle",n:["Toby","Shelly","Gus"],v:"crawls",h:"🏝️",s:["🥬","🍓","🌴","🐚","🌊","🍉","🍃","🌺"],bg:"#e6f8f0",rd:"#bfe7d6"},
+{e:"🐰",r:"Rabbit",n:["Coco","Daisy","Bun"],v:"hops",h:"🏡",s:["🥕","🥬","🌼","🍄","🍎","🌾","🍓","🌷"],bg:"#f1eaff",rd:"#d9cbf7"},
+{e:"🧑‍🚀",r:"Astronaut",n:["Nova","Orion","Sol"],v:"floats",h:"🚀",s:["🌕","🪐","⭐","☄️","🛰️","👽","🌍","✨"],bg:"#e9e6ff",rd:"#cfc8f7"}];
+function J(){const mode=pick(["total","missing"]),c=pick(CH),nm=pick(c.n),u=pick(["m","m","km"]),kind=mode=="missing"?pick(["rect","L","stairs","tri","rhombus","house"]):pick(["rect","L","U","stairs","T","tri","rhombus","house"]);let pts;
 if(kind=="rect"){const l=R(5,12),w=R(3,l-1);pts=[[0,0],[l,0],[l,w],[0,w]]}
-else if(kind=="L"){const a=R(6,12),d=R(6,12),c=R(2,a-2),b=R(2,d-2);pts=[[0,0],[a,0],[a,b],[c,b],[c,d],[0,d]]}
+else if(kind=="L"){const a=R(6,12),d=R(6,12),cc=R(2,a-2),b=R(2,d-2);pts=[[0,0],[a,0],[a,b],[cc,b],[cc,d],[0,d]]}
 else if(kind=="U"){const W=R(8,12),H=R(5,8),x1=R(2,3),x2=W-R(2,3),nd=R(2,H-2);pts=[[0,0],[x1,0],[x1,nd],[x2,nd],[x2,0],[W,0],[W,H],[0,H]]}
 else if(kind=="stairs"){const a=R(2,4),b=R(2,3);pts=[[0,0],[3*a,0],[3*a,b],[2*a,b],[2*a,2*b],[a,2*b],[a,3*b],[0,3*b]]}
-else{const W=R(8,12),t=R(2,3),H=R(6,8),x1=R(3,4),x2=x1+R(2,3);pts=[[0,0],[W,0],[W,t],[x2,t],[x2,H],[x1,H],[x1,t],[0,t]]}
-const n=pts.length,L=pts.map((p,i)=>dist(p,pts[(i+1)%n])),ans=sum(L),u=pick(["m","m","km"]),nm=pick(["Leo","Mia","Zoe","Max","Ana","Sam"]),stops=shuf(LM).slice(0,n-1),hid=mode=="missing"?R(0,n-1):-1;
-const em=v=>v%n==0?"🏠":stops[v%n-1][0],pl=v=>v%n==0?"home":stops[v%n-1][1],lab=e=>e==hid?"?":L[e]+" "+u;
+else if(kind=="T"){const W=R(8,12),t=R(2,3),H=R(6,8),x1=R(3,4),x2=x1+R(2,3);pts=[[0,0],[W,0],[W,t],[x2,t],[x2,H],[x1,H],[x1,t],[0,t]]}
+else if(kind=="tri"){const k=R(1,3);pts=[[0,0],[4*k,0],[0,-3*k]]}
+else if(kind=="rhombus"){const k=R(1,2);pts=[[0,4*k],[3*k,0],[6*k,4*k],[3*k,8*k]]}
+else{const[w,rh]=pick([[6,4],[8,3],[12,8]]),h=R(3,6);pts=[[0,0],[w/2,-rh],[w,0],[w,h],[0,h]]}
+const n=pts.length,L=pts.map((p,i)=>dist(p,pts[(i+1)%n])),ans=sum(L),stops=shuf(c.s).slice(0,n-1),hid=mode=="missing"?R(0,n-1):-1;
+const em=v=>v%n==0?c.h:stops[v%n-1],lab=e=>e==hid?"?":L[e]+" "+u;
 const W=440,H=320,p=66,xs=pts.map(a=>a[0]),ys=pts.map(a=>a[1]),x0=Math.min(...xs),y0=Math.min(...ys),w=Math.max(...xs)-x0||1,h=Math.max(...ys)-y0||1,k=Math.min((W-2*p)/w,(H-2*p)/h),ox=(W-w*k)/2,oy=(H-h*k)/2;
 const P=pts.map(a=>[ox+(a[0]-x0)*k,oy+(a[1]-y0)*k]),V=[...P,P[0]],Q=place(P,28,15,W,H,P.map(()=>true)),road=P.map(a=>a[0].toFixed(1)+","+a[1].toFixed(1)).join(" ");
-let s=`<svg id="jsvg" class="fig" viewBox="0 0 ${W} ${H}" role="img" aria-label="Trail map"><rect x="4" y="4" width="${W-8}" height="${H-8}" rx="22" fill="#e4f6dc"/><polygon points="${road}" fill="none" stroke="#c7d6ee" stroke-width="20" stroke-linejoin="round"/><polygon points="${road}" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="8 8" stroke-linejoin="round"/>`;
+let s=`<svg id="jsvg" class="fig" viewBox="0 0 ${W} ${H}" role="img" aria-label="Trip map"><rect x="4" y="4" width="${W-8}" height="${H-8}" rx="22" fill="${c.bg}"/>`;
+[[34,34],[W-34,34],[34,H-34],[W-34,H-34]].forEach((q,i)=>s+=`<text x="${q[0]}" y="${q[1]}" style="font-size:30px;opacity:.28;stroke:none">${c.s[i+4]}</text>`);
+s+=`<polygon points="${road}" fill="none" stroke="${c.rd}" stroke-width="22" stroke-linejoin="round"/><polygon points="${road}" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="8 8" stroke-linejoin="round"/>`;
 for(let e=0;e<n;e++)s+=`<line id="re${e}" x1="${V[e][0].toFixed(1)}" y1="${V[e][1].toFixed(1)}" x2="${V[e+1][0].toFixed(1)}" y2="${V[e+1][1].toFixed(1)}" stroke="#ffc93c" stroke-width="9" stroke-linecap="round" style="opacity:0;transition:opacity .4s"/>`;
 for(let i=0;i<n;i++)s+=`<circle cx="${V[i][0].toFixed(1)}" cy="${V[i][1].toFixed(1)}" r="17" fill="#fff" stroke="#9fb5f0" stroke-width="2"/><text x="${V[i][0].toFixed(1)}" y="${V[i][1].toFixed(1)}" style="font-size:20px;stroke:none">${em(i)}</text>`;
 for(let e=0;e<n;e++)s+=`<text id="lb${e}" x="${Q[e][0].toFixed(1)}" y="${Q[e][1].toFixed(1)}" style="font-size:${e==hid?24:15}px;${e==hid?'fill:#e63946;':''}opacity:0;transition:opacity .4s">${lab(e)}</text>`;
-s+=`<text id="bub" class="bub" x="0" y="0" style="font-size:18px;opacity:0;transition:opacity .3s"></text><g id="trv" tabindex="0" role="button" aria-label="Click the traveler to start the trip" style="cursor:pointer"><circle class="halo" r="22"/><text y="-2" style="font-size:30px;stroke:none">🚶</text></g></svg>`;
+s+=`<text id="bub" class="bub" x="0" y="0" style="font-size:18px;opacity:0;transition:opacity .3s"></text><g id="trv" tabindex="0" role="button" aria-label="Click the traveler to move"><circle class="halo" r="22"/><text y="-2" style="font-size:30px;stroke:none">${c.e}</text></g></svg>`;
 const d=new Set([ans-L[R(0,n-1)],ans+R(1,4),ans-R(1,4),ans+L[0],ans+2]);d.delete(ans);[...d].forEach(v=>{if(v<=0)d.delete(v)});while(d.size<3){const v=ans+pick([-3,-2,-1,1,2,3,4]);if(v>0&&v!=ans)d.add(v)}
 const opts=shuf([ans,...[...d].slice(0,3)]);
-const intro=`${nm} leaves 🏠 home, visits ${n-1} places and comes back home. `,q=mode=="missing"?`<p class="story" style="margin:0"><b>How long is the hidden road <span style="color:#e63946">?</span></b></p><p class="note" id="jn" style="text-align:left;margin:2px 0 6px">🔒 Watch the whole trip to unlock the answer box.</p><div class="row" style="margin:0"><input id="ans" type="number" step="any" inputmode="decimal" placeholder="Distance" aria-label="Hidden distance" disabled><b>${u}</b><button class="btn" id="chk" style="--c:#06a77d" disabled>Check</button></div>`:`<p class="story" style="margin:0"><b>How long is the whole trip around?</b></p><p class="note" id="jn" style="text-align:left;margin:2px 0 6px">🔒 Watch the whole trip to unlock the answers.</p><div class="opts">${opts.map(o=>`<button class="btn opt" disabled data-v="${o}">${o} ${u}</button>`).join("")}</div>`;
-render(`<div class="fbox">${s}</div><p class="note">Click ${nm} to start the trip. Click again while walking to skip, or after to replay.</p>`,`<p class="story">${intro}${mode=="missing"?`In total, ${nm} walked <b>${ans} ${u}</b>. Click ${nm} and watch the trip: one distance stays hidden (<b>?</b>). Use the total to find it.`:`Click ${nm} and watch the whole trip: every distance appears on the map as ${nm} walks. Then find the total.`}</p><ul class="log" id="log"></ul>${q}`);
-const trv=$('#trv');let busy=false,fast=false;
+const q=mode=="missing"?`<div class="row" style="margin:0"><input id="ans" type="number" step="any" inputmode="decimal" placeholder="Distance" aria-label="Hidden distance" disabled><b>${u}</b><button class="btn" id="chk" style="--c:#06a77d" disabled>Check</button></div>`:`<div class="opts">${opts.map(o=>`<button class="btn opt" disabled data-v="${o}">${o} ${u}</button>`).join("")}</div>`;
+render(`<div class="fbox">${s}</div>`,
+`<p class="story">${c.e} ${c.r} <b>${nm}</b> ${c.v} ${mode=="missing"?`<b>${ans} ${u}</b> in total. One road is hidden (?).`:`to ${n-1} places and back.`}</p><p class="story" style="margin:0"><b>${mode=="missing"?"How long is the hidden road?":"How long is the whole trip?"}</b></p><p class="note" id="jn" style="text-align:left;margin:2px 0 6px">🔒 Follow the whole trip first.</p>${q}`);
+$('#jbar').hidden=false;$('#tm').classList.add('hasj');const trv=$('#trv'),vis=$('#vis');let busy=false,fast=false,auto=true,leg=0,finished=false;
 const setT=(x,y)=>trv.setAttribute('transform',`translate(${x.toFixed(1)},${(y-24).toFixed(1)})`);setT(V[0][0],V[0][1]);
-function fin(){toast("🏁 Trip complete!");if(mode=="missing"){$('#jn').textContent=`🏁 Trip complete! Total walked: ${ans} ${u}. Add the known distances to find the hidden one.`;$('#ans').disabled=false;$('#chk').disabled=false;$('#ans').focus()}else{$('#jn').textContent="🏁 Trip complete! Add all the distances and choose the total.";document.querySelectorAll('.opt').forEach(x=>x.disabled=false)}}
-function run(){if(busy)return;busy=true;snd('start');$('#log').innerHTML='';for(let e=0;e<n;e++){$('#re'+e).style.opacity=0;$('#lb'+e).style.opacity=0}setT(V[0][0],V[0][1]);let e=0;
-const leg=()=>{if(e>=n){busy=false;fast=false;return fin()}const j=e,A=V[j],B=V[j+1],t0=performance.now();
-const f=t=>{const r=fast?1:Math.min(1,(t-t0)/600),qq=r<.5?2*r*r:1-Math.pow(-2*r+2,2)/2;setT(A[0]+(B[0]-A[0])*qq,A[1]+(B[1]-A[1])*qq);
-if(r<1)return requestAnimationFrame(f);
-$('#re'+j).style.opacity=1;$('#lb'+j).style.opacity=1;const b=$('#bub');b.textContent=lab(j);b.setAttribute('x',B[0]);b.setAttribute('y',B[1]-58);b.style.opacity=1;setTimeout(()=>b.style.opacity=0,fast?500:900);
-const li=document.createElement('li');li.textContent=`${nm} walked ${j==hid?"a hidden distance (?)":L[j]+" "+u} from ${pl(j)} to ${pl(j+1)}.`;$('#log').appendChild(li);$('#log').scrollTop=999;snd('point');e++;setTimeout(leg,fast?0:120)};f(t0)};leg()}
-trv.onclick=()=>{if(busy)fast=true;else{fast=false;run()}};trv.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();trv.onclick()}};
+const mode2=a=>{auto=a;$('#bA').classList.toggle('on',a);$('#bM').classList.toggle('on',!a)};mode2(true);
+function fin(){finished=true;toast("🏁 Trip complete!");if(mode=="missing"){$('#jn').textContent=`🏁 Total: ${ans} ${u}. Find the hidden road.`;$('#ans').disabled=false;$('#chk').disabled=false;$('#ans').focus()}else{$('#jn').textContent="🏁 Add all the roads and choose.";document.querySelectorAll('.opt').forEach(x=>x.disabled=false)}}
+function reset(){leg=0;for(let e=0;e<n;e++){$('#re'+e).style.opacity=0;$('#lb'+e).style.opacity=0}setT(V[0][0],V[0][1])}
+function walk(done){const j=leg,A=V[j],B=V[j+1],t0=performance.now();
+const f=t=>{const r=fast?1:Math.min(1,(t-t0)/600),qq=r<.5?2*r*r:1-Math.pow(-2*r+2,2)/2;setT(A[0]+(B[0]-A[0])*qq,A[1]+(B[1]-A[1])*qq);if(r<1)return requestAnimationFrame(f);
+$('#re'+j).style.opacity=1;$('#lb'+j).style.opacity=1;const b=$('#bub');b.textContent=lab(j);b.setAttribute('x',B[0]);b.setAttribute('y',B[1]-58);b.style.opacity=1;setTimeout(()=>b.style.opacity=0,fast?500:900);snd('point');leg++;done()};f(t0)}
+function runAuto(){if(busy){fast=true;return}if(leg>=n)reset();busy=true;fast=false;snd('start');const go=()=>{if(leg>=n){busy=false;fast=false;return fin()}walk(()=>setTimeout(go,fast?0:120))};go()}
+function stepOne(){if(busy)return;if(leg>=n)reset();busy=true;fast=false;walk(()=>{busy=false;if(leg>=n)fin()})}
+const go=()=>{vis.dataset.cur='arrow';auto?runAuto():stepOne()};
+trv.onclick=go;trv.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();go()}};
+$('#bA').onclick=()=>{mode2(true);vis.dataset.cur='arrow';runAuto()};$('#bM').onclick=()=>{mode2(false);vis.dataset.cur='arrow';stepOne()};
 if(mode=="missing")$('#chk').onclick=()=>{if($('#chk').disabled)return;const x=parseFloat($('#ans').value);if(isNaN(x))return fb(0,"Type the hidden distance first.",1);const ks=ans-L[hid];
-x==L[hid]?fb(1,`The known roads add up to ${L.filter((_,i)=>i!=hid).join(" + ")} = ${ks} ${u}. So the hidden road is ${ans} − ${ks} = ${L[hid]} ${u}. Give +1 to the winning team!`):fb(0,x==ans?"That is the total of the whole trip. Find only the hidden road.":"Add the known distances, then subtract that sum from the total.")};
-else document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(b.disabled)return;const ok=+b.dataset.v==ans;b.style.setProperty('--c',ok?'#06a77d':'#e63946');ok?fb(1,`The whole trip is ${L.join(" + ")} = ${ans} ${u}. Give +1 to the winning team!`):fb(0,"Add the distance of every road of the trip.")})}
+x==L[hid]?fb(1,`The known roads add up to ${L.filter((_,i)=>i!=hid).join(" + ")} = ${ks} ${u}. So the hidden road is ${ans} − ${ks} = ${L[hid]} ${u}.`):fb(0,x==ans?"That is the total of the whole trip. Find only the hidden road.":"Add the known distances, then subtract that sum from the total.")};
+else document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(b.disabled)return;const ok=+b.dataset.v==ans;b.style.setProperty('--c',ok?'#06a77d':'#e63946');ok?fb(1,`The whole trip is ${L.join(" + ")} = ${ans} ${u}.`):fb(0,"Add the distance of every road of the trip.")})}
+/* Calculator mode = Questions + Calculator */
+function CQ(){Math.random()<.5?Q():C()}
+/* Explorer */
+function X(){const kind=pick(["rect","square","tri","L","reg","irr","comp"]),sh=shape(kind),u=pick(["m","cm","ft"]),L=sh.L,n=L.length,P=sum(L),W=440,H=300,p=62,EC=["#ef476f","#118ab2","#06a77d","#f4a300","#7b5cff","#ff6b35","#00a6a6","#d6336c"];
+const xs=sh.pts.map(a=>a[0]),ys=sh.pts.map(a=>a[1]),x0=Math.min(...xs),y0=Math.min(...ys),w=Math.max(...xs)-x0||1,h=Math.max(...ys)-y0||1,k=Math.min((W-2*p)/w,(H-2*p)/h),ox=(W-w*k)/2,oy=(H-h*k)/2,tf=a=>[ox+(a[0]-x0)*k,oy+(a[1]-y0)*k],Pt=sh.pts.map(tf),Q2=place(Pt,26,16,W,H,Pt.map(()=>true)),f1=q=>q.map(a=>tf(a).map(v=>v.toFixed(1)).join(",")).join(" "),parts=sh.parts||[{pts:sh.pts,col:pick(PAL)}];
+let s=`<svg class="fig xs" id="xs" viewBox="0 0 ${W} ${H}" role="img" aria-label="Figure with hidden sides"><g class="sh">${parts.map(q=>`<polygon class="pt" style="fill:${q.col}" points="${f1(q.pts)}"/>`).join("")}</g><polygon class="ol" points="${f1(sh.pts)}"/>`;
+if(sh.ticks){s+='<g class="tk">';Pt.forEach((a,i)=>{const b=Pt[(i+1)%n],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,nx=dy/l*7,ny=-dx/l*7;s+=`<line x1="${(mx-nx).toFixed(1)}" y1="${(my-ny).toFixed(1)}" x2="${(mx+nx).toFixed(1)}" y2="${(my+ny).toFixed(1)}"/>`});s+='</g>'}
+for(let i=0;i<n;i++){const b=Pt[(i+1)%n];s+=`<line id="xe${i}" x1="${Pt[i][0].toFixed(1)}" y1="${Pt[i][1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${EC[i%8]}" stroke-width="10" stroke-linecap="round" style="opacity:0;transition:opacity .25s;pointer-events:none"/>`}
+for(let i=0;i<n;i++)s+=`<text id="xl${i}" x="${Q2[i][0].toFixed(1)}" y="${Q2[i][1].toFixed(1)}" style="font-size:17px;fill:${EC[i%8]};opacity:0;transition:opacity .25s">${L[i]} ${u}</text>`;
+s+='</svg>';
+render(`<div class="fbox">${s}</div>${note(sh)}`,`<p class="story">🔍 The sides are hidden. Sweep the lens over the figure, then find the perimeter.</p><p class="fc">Sides found: <b id="xc">0</b> / ${n}</p><div class="row" style="margin:0"><input id="ans" type="number" step="any" inputmode="decimal" placeholder="Perimeter" aria-label="Perimeter"><b>${u}</b><button class="btn" id="chk" style="--c:#06a77d">Check</button></div>`);
+const sv=$('#xs'),found=new Set();let done=false;
+const dseg=(q,a,b)=>{const dx=b[0]-a[0],dy=b[1]-a[1],l2=dx*dx+dy*dy||1;let t=((q[0]-a[0])*dx+(q[1]-a[1])*dy)/l2;t=Math.max(0,Math.min(1,t));return Math.hypot(q[0]-a[0]-t*dx,q[1]-a[1]-t*dy)};
+function probe(e){if(done)return;const r=sv.getBoundingClientRect(),q=[(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*H/r.height];let bi=-1,bd=16;
+Pt.forEach((a,i)=>{const d=dseg(q,a,Pt[(i+1)%n]);if(d<bd){bd=d;bi=i}});if(bi<0||found.has(bi))return;
+found.add(bi);$('#xe'+bi).style.opacity=1;$('#xl'+bi).style.opacity=1;$('#xc').textContent=found.size;snd('point');
+const sp=document.createElementNS('http://www.w3.org/2000/svg','text');sp.setAttribute('class','spk');sp.setAttribute('x',Q2[bi][0]);sp.setAttribute('y',Q2[bi][1]-18);sp.textContent='✨';sv.appendChild(sp);setTimeout(()=>sp.remove(),900)}
+sv.onpointermove=probe;sv.onpointerdown=e=>{e.preventDefault();probe(e)};
+$('#chk').onclick=()=>{if(done)return;const v=parseFloat($('#ans').value);if(isNaN(v))return fb(0,"Type the perimeter first.",1);
+if(v==P){done=true;for(let i=0;i<n;i++){$('#xe'+i).style.opacity=1;$('#xl'+i).style.opacity=1}fb(1,kind=="reg"?`P = ${n} × ${L[0]} = ${P} ${u}.`:`P = ${L.join(" + ")} = ${P} ${u}.`)}
+else fb(0,found.size<n?"Keep exploring. Find every side with the lens.":"Add the length of every side.")}}
+/* Unknown */
+function Uk(){const kind=pick(["rect","square","tri","L","reg","comp","irr"]),sh=shape(kind),u=pick(["m","cm","ft"]),L=sh.L,n=L.length,P=sum(L),uk=pick(sh.shown),ans=L[uk];
+const cs=shuf([ans+1,ans-1,ans+2,ans-2,ans+3,P-ans,kind=="rect"?P/2:ans*2,kind=="reg"||kind=="square"?P-ans:ans+4].filter(v=>v>0&&v!=ans&&Number.isInteger(v))),d=[...new Set(cs)].slice(0,3);
+for(let a=1;d.length<3;a++)if(!d.includes(ans+a+4))d.push(ans+a+4);
+const opts=shuf([ans,...d]);
+render(fig(sh.pts,labels(sh,u,uk),so(sh))+note(sh),`<p class="story">Perimeter: <b>${P} ${u}</b>.<br>Find the side marked <b>?</b>.</p><div class="opts">${opts.map(o=>`<button class="btn opt" data-v="${o}">${o} ${u}</button>`).join("")}</div>`);
+const how=kind=="reg"||kind=="square"?`${P} ÷ ${n==4&&kind=="square"?4:n} = ${ans} ${u}`:kind=="rect"?`${P} ÷ 2 = ${P/2}, then ${P/2} − ${L[1-uk]} = ${ans} ${u}`:`${P} − ${P-ans} = ${ans} ${u}`;
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=+b.dataset.v==ans;b.style.setProperty('--c',ok?'#06a77d':'#e63946');ok?fb(1,how+"."):fb(0,kind=="reg"||kind=="square"?"All sides are equal. Divide the perimeter by the number of sides.":"Add the known sides, then subtract that sum from the perimeter.")})}
+/* Predict the Error */
+function PE(){const kind=pick(["rect","square","tri","L","reg","comp"]),sh=shape(kind),u=pick(["m","cm","ft"]),L=sh.L,n=L.length,P=sum(L),nm=pick(["Ana","Leo","Mia","Sam","Zoe","Max"]),J2=a=>a.join(" + "),a0=L[0],b0=L[1],opts=["missing","arith","unit"];
+if(kind=="rect"){opts.push("two");if(a0*b0!=P)opts.push("area")}if(kind=="square"&&a0*a0!=P)opts.push("area");if(kind=="reg")opts.push("count");
+const ty=pick(opts),T3=["Step 1 · Read the sides","Step 2 · Add","Step 3 · Answer"],all=`The sides are ${L.join(", ")} ${u}.`;let st,bad,cor,fix,hint;
+if(ty=="missing"){const Ls=[...L];Ls.splice(R(0,n-1),1);st=[[T3[0],`The sides are ${Ls.join(", ")} ${u}.`],[T3[1],`P = ${J2(Ls)} = ${sum(Ls)} ${u}`],[T3[2],`The perimeter is ${sum(Ls)} ${u}.`]];bad=0;cor=all;fix=`A side was left out. The figure has ${n} sides: P = ${J2(L)} = ${P} ${u}.`;hint="The list is missing a side. Count the sides of the figure and add them all."}
+else if(ty=="arith"){let w=P+pick([-3,-2,-1,1,2,3]);if(w<=0)w=P+2;st=[[T3[0],all],[T3[1],`P = ${J2(L)} = ${w} ${u}`],[T3[2],`The perimeter is ${w} ${u}.`]];bad=1;cor=`P = ${J2(L)} = ${P} ${u}`;fix=`The sides were right, but the addition was wrong: ${J2(L)} = ${P} ${u}.`;hint="Add the sides again, one by one."}
+else if(ty=="unit"){st=[[T3[0],all],[T3[1],`P = ${J2(L)} = ${P}`],[T3[2],`The perimeter is ${P} ${u}².`]];bad=2;cor=`The perimeter is ${P} ${u}.`;fix=`Perimeter is a length, so it is measured in ${u}, not in square units. P = ${P} ${u}.`;hint="Perimeter is a length. Add the sides again and write the right unit."}
+else if(ty=="area"){const sq=kind=="square",A2=sq?a0*a0:a0*b0;st=[["Step 1 · Formula",sq?"P = side × side":"P = length × width"],["Step 2 · Calculate",sq?`P = ${a0} × ${a0} = ${A2} ${u}`:`P = ${a0} × ${b0} = ${A2} ${u}`],[T3[2],`The perimeter is ${A2} ${u}.`]];bad=0;cor=sq?"P = 4 × side":"P = 2 × (length + width)";fix=sq?`That formula gives the area. The perimeter of a square is P = 4 × ${a0} = ${P} ${u}.`:`That formula gives the area. The perimeter of a rectangle is P = 2 × (${a0} + ${b0}) = ${P} ${u}.`;hint="Perimeter is the distance around. Add all the sides."}
+else if(ty=="two"){st=[["Step 1 · Formula","P = length + width"],["Step 2 · Calculate",`P = ${a0} + ${b0} = ${a0+b0} ${u}`],[T3[2],`The perimeter is ${a0+b0} ${u}.`]];bad=0;cor="P = 2 × (length + width)";fix=`A rectangle has four sides, not two: P = 2 × (${a0} + ${b0}) = ${P} ${u}.`;hint="A rectangle has four sides. Use two lengths and two widths."}
+else{const c=n==3?4:n+pick([-1,1]);st=[["Step 1 · Count the sides",`A ${sh.name} has ${c} sides of ${a0} ${u}.`],["Step 2 · Multiply",`P = ${c} × ${a0} = ${c*a0} ${u}`],[T3[2],`The perimeter is ${c*a0} ${u}.`]];bad=0;cor=`A ${sh.name} has ${n} sides of ${a0} ${u}.`;fix=`Count the sides again: the ${sh.name} has ${n} sides. P = ${n} × ${a0} = ${P} ${u}.`;hint="Count the sides of the polygon, then multiply by one side."}
+render(fig(sh.pts,labels(sh,u),so(sh)).replace('class="fbox"','class="fbox" style="width:min(100%,430px)"')+note(sh)+`<div class="board" style="width:min(100%,760px);margin-top:12px"><h4>📓 ${nm}'s solution</h4>${st.map((s,i)=>`<div class="step" role="button" tabindex="0" data-i="${i}"><span>${s[0]}</span>${s[1]}</div>`).join("")}</div>`,
+`<p class="story">🕵️ <b>${nm}</b> made <b>one mistake</b>. Click the step where the error is.</p><div class="row" style="margin:0 0 6px"><button class="btn" id="ent" style="--c:#7b5cff" disabled>✏️ Enter answer</button></div><div id="ar2" hidden><p class="story" style="margin:6px 0 0">Now fix it. What is the correct perimeter?</p><div class="row" style="margin:6px 0 0"><input id="ans" type="number" step="any" inputmode="decimal" placeholder="Value" aria-label="Value"><select id="un" aria-label="Unit"><option value="">Unit</option>${U.map(x=>`<option>${x}</option>`).join("")}</select></div><div class="row" style="margin:6px 0 0"><button class="btn small" id="chg">↩ Change step</button><button class="btn" id="chk" style="--c:#06a77d">Check</button></div></div>`);
+const vis=$('#vis'),stp=[...document.querySelectorAll('.step')];let sel=-1,lock=false,done=false;
+const choose=i=>{if(lock||done)return;sel=i;stp.forEach((s,j)=>s.classList.toggle('sel',j==i));vis.dataset.cur='ok';$('#ent').disabled=false;snd('step')};
+stp.forEach((s,i)=>{s.onclick=()=>choose(i);s.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();choose(i)}}});
+$('#ent').onclick=()=>{if(sel<0||done)return;lock=true;vis.dataset.cur='arrow';$('#ar2').hidden=false;$('#ent').disabled=true;$('#ans').focus()};
+$('#chg').onclick=()=>{if(done)return;lock=false;$('#ar2').hidden=true;vis.dataset.cur=sel>=0?'ok':'err';$('#ent').disabled=sel<0};
+$('#chk').onclick=()=>{if(done)return;const v=parseFloat($('#ans').value),un=$('#un').value;if(isNaN(v)||!un)return fb(0,"Type a number and choose a unit first.",1);
+if(sel!=bad){const s=stp[sel];s.classList.add('bad');setTimeout(()=>s.classList.remove('bad'),500);s.classList.remove('sel');sel=-1;lock=false;$('#ar2').hidden=true;$('#ent').disabled=true;vis.dataset.cur='err';return fb(0,"That step is correct. Check each step against the figure and try another one.")}
+if(v==P&&un==u){done=true;vis.dataset.cur='arrow';stp[bad].classList.remove('sel');stp[bad].classList.add('fixed');stp[bad].innerHTML=`<span>${st[bad][0]} · corrected</span>${cor}`;['#ans','#un','#chk','#chg'].forEach(q=>$(q).disabled=true);fb(1,fix)}
+else if(v==P)fb(0,"The number is right, but check the unit of measure.");else fb(0,hint)}}
+/* Drawing */
+function D(){const cols=12,rows=9,S=36,PAD=30,T=10,W=cols*S+2*PAD,H=rows*S+2*PAD,u=pick(["m","cm","ft"]),ty=pick(["plain","rope","sum","formula","rect","square","pieces","L"]);let P,need="any",txt,a,b;
+if(ty=="square"){const q=R(2,6);P=4*q;need="square";txt=`Draw a <b>square</b> with a perimeter of <b>${P} ${u}</b>.`}
+else if(ty=="rect"){a=R(2,7);b=R(1,Math.min(6,a));P=2*(a+b);need="rect";txt=`Draw a <b>rectangle</b> with a perimeter of <b>${P} ${u}</b>.`}
+else if(ty=="L"){P=2*R(4,11);need="L";txt=`Draw an <b>L-shaped</b> figure with a perimeter of <b>${P} ${u}</b>.`}
+else if(ty=="sum"){a=R(2,7);b=R(1,6);P=2*(a+b);txt=`<b>P = ${a} + ${b} + ${a} + ${b} ${u}</b><br>Draw a figure with this perimeter.`}
+else if(ty=="formula"){if(Math.random()<.5){a=R(2,7);b=R(1,6);P=2*(a+b);txt=`<b>P = 2 × (${a} + ${b}) ${u}</b>`}else{a=R(2,6);P=4*a;txt=`<b>P = 4 × ${a} ${u}</b>`}txt+="<br>Draw a figure with this perimeter."}
+else if(ty=="rope"){P=2*R(4,12);txt=`🪢 A rope of <b>${P} ${u}</b> goes around a garden. Draw the garden.`}
+else if(ty=="pieces"){P=2*R(4,12);txt=`🧱 You have <b>${P} ${u}</b> of fence. Use all of it to fence a figure.`}
+else{P=2*R(4,12);txt=`Draw a figure with a perimeter of <b>${P} ${u}</b>.`}
+let s=`<svg class="dsv" id="dsv" viewBox="0 0 ${W} ${H}" role="img" aria-label="Drawing grid with rulers"><rect width="${W}" height="${H}" rx="16" fill="#fffdf4"/>`;
+s+=`<rect x="${PAD-12}" y="4" width="${cols*S+24}" height="${PAD-12}" rx="6" fill="#ffe9a3" stroke="#d9a920" stroke-width="1.5"/><rect x="4" y="${PAD-12}" width="${PAD-12}" height="${rows*S+24}" rx="6" fill="#ffe9a3" stroke="#d9a920" stroke-width="1.5"/><g stroke="#8a6a00" stroke-width="1.5" stroke-linecap="round">`;
+for(let x=0;x<=cols;x++){const X=PAD+x*S;s+=`<line x1="${X}" y1="16" x2="${X}" y2="${PAD-8}"/>`;if(x<cols)s+=`<line x1="${X+S/2}" y1="19" x2="${X+S/2}" y2="${PAD-8}"/>`}
+for(let y=0;y<=rows;y++){const Y=PAD+y*S;s+=`<line x1="16" y1="${Y}" x2="${PAD-8}" y2="${Y}"/>`;if(y<rows)s+=`<line x1="19" y1="${Y+S/2}" x2="${PAD-8}" y2="${Y+S/2}"/>`}
+s+=`</g><g font-family="Fredoka,system-ui,sans-serif" font-size="11" font-weight="700" fill="#6b5000" text-anchor="middle" dominant-baseline="central">`;
+for(let x=0;x<=cols;x++)s+=`<text x="${PAD+x*S}" y="9">${x}</text>`;
+for(let y=0;y<=rows;y++)s+=`<text x="9" y="${PAD+y*S}">${y}</text>`;
+s+=`</g>`;
+for(let x=0;x<=cols;x++)s+=`<line x1="${PAD+x*S}" y1="${PAD}" x2="${PAD+x*S}" y2="${PAD+rows*S}" stroke="#d5e2f5" stroke-width="1.5"/>`;
+for(let y=0;y<=rows;y++)s+=`<line x1="${PAD}" y1="${PAD+y*S}" x2="${PAD+cols*S}" y2="${PAD+y*S}" stroke="#d5e2f5" stroke-width="1.5"/>`;
+for(let x=0;x<=cols;x++)for(let y=0;y<=rows;y++)s+=`<circle cx="${PAD+x*S}" cy="${PAD+y*S}" r="2.6" fill="#9fb5f0"/>`;
+s+=`<g id="dfl"></g><g id="dpl"></g><g id="dlb" style="pointer-events:none"></g><line id="dgh" stroke="#2748b8" stroke-opacity=".35" stroke-width="8" stroke-linecap="round" style="display:none;pointer-events:none"/></svg>`;
+render(`<div class="dwrap"><div class="dinfo"><div>${txt}</div><div class="dleg"><i></i> = 1 ${u}<br><small>Distance between two dots</small></div></div>${s}</div>`,`<p class="story">Click or drag along the grid lines to draw. Measure each side along its border with the ruler (top and left). Click a line again to erase it.</p><div class="row" style="margin:0"><button class="btn" id="clr" style="--c:#6c5ce7">Clear</button><button class="btn" id="chk" style="--c:#06a77d">Verify</button></div>`);
+const sv=$('#dsv'),E=new Set(),gh=$('#dgh');let down=false,dm=null,lk=null,done=false;
+const ec=k=>{const[x,y]=k.slice(1).split('_').map(Number),X=PAD+x*S,Y=PAD+y*S;return k[0]=='h'?[X,Y,X+S,Y]:[X,Y,X,Y+S]};
+const pos=e=>{const r=sv.getBoundingClientRect();return[(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*H/r.height]};
+function edgeAt(x,y){const gx=(x-PAD)/S,gy=(y-PAD)/S,ry=Math.round(gy),rx=Math.round(gx),dh=Math.abs(gy-ry)*S,dv=Math.abs(gx-rx)*S,cx=Math.floor(gx),cy=Math.floor(gy);let best=null,bd=T;
+if(dh<bd&&cx>=0&&cx<cols&&ry>=0&&ry<=rows){best='h'+cx+'_'+ry;bd=dh}if(dv<bd&&cy>=0&&cy<rows&&rx>=0&&rx<=cols)best='v'+rx+'_'+cy;return best}
+/* straight sides: each run of connected edges on the same line is one side, measured along its border */
+function sides(){const r=[],hs=new Map(),vs=new Map();
+E.forEach(k=>{const[x,y]=k.slice(1).split('_').map(Number);if(k[0]=='h'){if(!hs.has(y))hs.set(y,[]);hs.get(y).push(x)}else{if(!vs.has(x))vs.set(x,[]);vs.get(x).push(y)}});
+const grp=(m,h)=>m.forEach((arr,c)=>{arr.sort((p,q)=>p-q);let s0=arr[0],p=s0;for(let i=1;i<=arr.length;i++){if(i<arr.length&&arr[i]==p+1){p=arr[i];continue}
+r.push(h?{x1:s0,y1:c,x2:p+1,y2:c,len:p+1-s0}:{x1:c,y1:s0,x2:c,y2:p+1,len:p+1-s0});if(i<arr.length){s0=arr[i];p=s0}}});
+grp(hs,1);grp(vs,0);return r}
+const redraw=()=>{$('#dpl').innerHTML=[...E].map(k=>{const q=ec(k);return `<line x1="${q[0]}" y1="${q[1]}" x2="${q[2]}" y2="${q[3]}" stroke="#2748b8" stroke-width="6" stroke-linecap="round"/>`}).join("");
+$('#dlb').innerHTML=sides().map(r=>{const mx=PAD+(r.x1+r.x2)/2*S,my=PAD+(r.y1+r.y2)/2*S;return `<g><rect x="${mx-13}" y="${my-10}" width="26" height="20" rx="10" fill="#fff" stroke="#2748b8" stroke-width="2"/><text x="${mx}" y="${my+1}" text-anchor="middle" dominant-baseline="central" font-family="Fredoka,system-ui,sans-serif" font-size="13" font-weight="700" fill="#1b2a49">${r.len}</text></g>`}).join("")};
+function editAt(px,py,first){if(done)return;
+/* pressing exactly on a dot is ambiguous: wait for the drag direction */
+if(first&&Math.abs((px-PAD)/S-Math.round((px-PAD)/S))*S<T&&Math.abs((py-PAD)/S-Math.round((py-PAD)/S))*S<T)return;const k=edgeAt(px,py);if(!k)return;const o=k[0],[kx,ky]=k.slice(1).split('_').map(Number);
+/* dragging a side: ignore the edge that starts right at a corner until the pointer is clearly inside it, and ignore edges crossing the side */
+if(!first){const f=o=='h'?(px-PAD)/S-kx:(py-PAD)/S-ky;if(f<.25||f>.75)return}
+if(lk&&o!=lk.o){const d=lk.o=='h'?Math.abs(py-(PAD+lk.i*S)):Math.abs(px-(PAD+lk.i*S));if(d<S*.5)return}
+lk={o,i:o=='h'?ky:kx};if(dm==null)dm=E.has(k)?'rm':'add';if(dm=='add'&&!E.has(k)){E.add(k);snd('step');redraw()}else if(dm=='rm'&&E.has(k)){E.delete(k);redraw()}}
+let lp=null;
+function drag(e){const q=pos(e);if(!lp){editAt(q[0],q[1],false);lp=q;return}const dx=q[0]-lp[0],dy=q[1]-lp[1],n=Math.max(1,Math.ceil(Math.hypot(dx,dy)/6));for(let i=1;i<=n;i++)editAt(lp[0]+dx*i/n,lp[1]+dy*i/n,false);lp=q}
+sv.onpointerdown=e=>{if(e.button>0)return;e.preventDefault();try{sv.setPointerCapture(e.pointerId)}catch(_){}down=true;dm=null;lk=null;lp=pos(e);editAt(lp[0],lp[1],true)};
+sv.onpointermove=e=>{if(down)drag(e);else if(!done){const k=edgeAt(...pos(e));if(k){const q=ec(k);gh.setAttribute('x1',q[0]);gh.setAttribute('y1',q[1]);gh.setAttribute('x2',q[2]);gh.setAttribute('y2',q[3]);gh.style.display=''}else gh.style.display='none'}};
+sv.onpointerup=sv.onpointercancel=()=>{down=false;dm=null;lk=null;lp=null};sv.onpointerleave=()=>{if(!down)gh.style.display='none'};
+function analyze(){const adj=new Map();E.forEach(k=>{const[x,y]=k.slice(1).split('_').map(Number),v1=x+','+y,v2=k[0]=='h'?(x+1)+','+y:x+','+(y+1);[[v1,v2],[v2,v1]].forEach(([p,q])=>{if(!adj.has(p))adj.set(p,[]);adj.get(p).push(q)})});
+for(const[,l]of adj){if(l.length==1)return{err:"Your figure is not closed yet."};if(l.length>2)return{err:"Lines can't cross or branch."}}
+const st=adj.keys().next().value,seen=new Set([st]),stk=[st];while(stk.length){const p=stk.pop();adj.get(p).forEach(q=>{if(!seen.has(q)){seen.add(q);stk.push(q)}})}
+if(seen.size!=adj.size)return{err:"Draw only one figure."};
+let corners=0;adj.forEach((l,p)=>{const[x,y]=p.split(',').map(Number),[m,n2]=l.map(q=>q.split(',').map(Number));if(!((m[0]==x&&n2[0]==x)||(m[1]==y&&n2[1]==y)))corners++});
+const out=new Set(['-1,-1']),stack=[[-1,-1]];
+while(stack.length){const[x,y]=stack.pop();[[1,0],[-1,0],[0,1],[0,-1]].forEach(([dx,dy])=>{const nx=x+dx,ny=y+dy,id=nx+','+ny;if(nx<-1||ny<-1||nx>cols||ny>rows||out.has(id))return;
+const blk=dx==1?E.has('v'+(x+1)+'_'+y):dx==-1?E.has('v'+x+'_'+y):dy==1?E.has('h'+x+'_'+(y+1)):E.has('h'+x+'_'+y);if(!blk){out.add(id);stack.push([nx,ny])}})}
+const cl=[];for(let y=0;y<rows;y++)for(let x=0;x<cols;x++)if(!out.has(x+','+y))cl.push([x,y]);
+const bw=Math.max(...cl.map(c=>c[0]))-Math.min(...cl.map(c=>c[0]))+1,bh=Math.max(...cl.map(c=>c[1]))-Math.min(...cl.map(c=>c[1]))+1;return{perim:E.size,cl,corners,bw,bh}}
+$('#clr').onclick=()=>{if(done)return;E.clear();redraw();$('#fb').className='fb';$('#fb').innerHTML=''};
+$('#chk').onclick=()=>{if(done)return;if(!E.size)return fb(0,"Draw your figure first.",1);const A=analyze();if(A.err)return fb(0,A.err);const sd=sides().map(r=>r.len);
+if(A.perim!=P)return fb(0,`Your sides add up to ${sd.join(" + ")} = ${A.perim} ${u}. You need ${P} ${u}.`);
+if((need=="rect"||need=="square")&&A.cl.length!=A.bw*A.bh)return fb(0,"The perimeter is right, but the figure must be a rectangle.");
+if(need=="square"&&A.bw!=A.bh)return fb(0,"The perimeter is right, but the sides of a square are equal.");
+if(need=="L"&&A.corners!=6)return fb(0,"The perimeter is right, but the figure must be L-shaped.");
+done=true;gh.style.display='none';const col=pick(PAL);$('#dfl').innerHTML=A.cl.map(c=>`<rect class="dfc" x="${PAD+c[0]*S}" y="${PAD+c[1]*S}" width="${S}" height="${S}" fill="${col}"/>`).join("");
+fb(1,`Your sides: ${sd.join(" + ")} = ${P} ${u}.`)}}
 </script></body></html>
